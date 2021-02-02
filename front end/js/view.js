@@ -1,60 +1,65 @@
 
-const afficheProduit =  (teddie) => {
+const afficheProduit =  (camera) => {
     
-    /*document.getElementById("image").innerHTML += '<img src="'+teddie.imageUrl+'" />'
-    document.getElementById("title").textContent += teddie.name
-    document.getElementById("description").textContent += teddie.description
-    document.getElementById("price").textContent += "prix : " + teddie.price */
-    
-    
-    
-    const templateElt = document.getElementById("templateArticle")
-    const cloneElt = document.importNode(templateElt.content, true)
-    
-    document.getElementById("image").innerHTML += '<img src="'+teddie.imageUrl+'" />';
-    cloneElt.getElementById("title").textContent = teddie.name
-    cloneElt.getElementById("description").textContent = teddie.description
-    cloneElt.getElementById("price").textContent = "prix : " + teddie.price
-    document.getElementById("divParent").appendChild(cloneElt)
 
-    }
+//lien avec la page HTML
 
-    /*document.body.appendChild(document.createElement('main'))
-    document.querySelector('main').appendChild(document.createElement('h1'))
-    document.querySelector('main').appendChild(document.createElement('div')).setAttribute("id", "divParent");
-
-    document.querySelector('div').appendChild(document.createElement('section')).setAttribute("id", "templateArticle");
-    //document.querySelector('template').appendChild(document.createElement('section'))
-    document.querySelector('section').appendChild(document.createElement('a.')).setAttribute("id", "image");
-    document.querySelector('section').appendChild(document.createElement('a')).setAttribute("id", "content");
-    document.querySelector('a').appendChild(document.createElement('h2')).setAttribute("id", "title");
-    document.querySelector('a').appendChild(document.createElement('p')).setAttribute("id", "description");
-    document.querySelector('a').appendChild(document.createElement('span')).setAttribute("id", "price");*/
-
-const structure = () => {
-    document.body.appendChild(document.createElement('main'))
-    document.querySelector('main').appendChild(document.createElement('h1'))
-    document.querySelector('main').appendChild(document.createElement('div')).setAttribute("id", "divParent");
-
-        const cloneStructure = () => {
-            document.querySelector('div').appendChild(document.createElement('template')).setAttribute("id", "templateArticle");
-            document.querySelector('template').appendChild(document.createElement('section'))
-            document.querySelector('section').appendChild(document.createElement('a')).setAttribute("id", "image");
-            document.querySelector('section').appendChild(document.createElement('a')).setAttribute("id", "content");
-            document.querySelector('a').appendChild(document.createElement('h2')).setAttribute("id", "titleArticle");
-            document.querySelector('a').appendChild(document.createElement('p')).setAttribute("id", "description");
-            document.querySelector('a').appendChild(document.createElement('span')).setAttribute("id", "price");
-        }
-    cloneStructure();
-    
- } 
+let produit = document.getElementById("element_principal");
 
 
+// creation structur html
 
 
-structure();
+let ficheProduit = document.createElement("section");
+let elemntProduit = document.createElement("div");
+let photoProduit = document.createElement("img");
+let textProduit = document.createElement("div");
+let nameProduit = document.createElement("h2");
+let informationProduit = document.createElement("a");
+let priceProduit = document.createElement("span");
 
-let footElt = document.querySelector('footer');
-let eltOfMain = document.querySelector('main');
-document.body.insertBefore(eltOfMain,footElt);
+//attribut produit
+
+ficheProduit.setAttribute("class", "fiche_produit");
+elemntProduit.setAttribute("class", "elements_produits");
+ficheProduit.setAttribute("id", camera._id);
+//ficheProduit.setAttribute("onclick","getCamera(this.id)")
+textProduit.setAttribute("class", "text_produits");
+photoProduit.setAttribute("src", camera.imageUrl);
+photoProduit.setAttribute("alt", "image du produit");
+photoProduit.setAttribute("class", "image_produit");
+nameProduit.setAttribute("class", "nom_du_produit");
+informationProduit.setAttribute("class", "information_produit");
+informationProduit.setAttribute("href", "produit.html?id=" + camera._id)
+priceProduit.setAttribute("class", "prix_produit");
+
+
+//agencement html
+
+produit.appendChild(contentAllProduct);
+contentAllProduct.appendChild(ficheProduit);
+ficheProduit.appendChild(elemntProduit);
+ficheProduit.appendChild(textProduit);
+elemntProduit.appendChild(photoProduit);
+textProduit.appendChild(nameProduit);
+textProduit.appendChild(informationProduit);
+textProduit.appendChild(priceProduit);
+
+//contenue produit
+nameProduit.textContent = camera.name;
+informationProduit.textContent = "Fiche produit";
+priceProduit.textContent = camera.price / 100 + " euros";
+
+
+
+
+}
+
+let contentAllProduct = document.createElement("div");
+
+//attribut produit
+
+contentAllProduct.setAttribute("class", "enssembles_produits" );
+
+
 

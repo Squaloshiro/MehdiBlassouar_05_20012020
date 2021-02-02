@@ -13,7 +13,7 @@ const structure = () => {
             document.querySelector('a').appendChild(document.createElement('span')).setAttribute("id", "price");
         }
     cloneStructure();
-    let test3 = cloneStructure;
+    
 
 
 }

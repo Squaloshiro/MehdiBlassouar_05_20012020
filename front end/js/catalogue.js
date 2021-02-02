@@ -1,10 +1,16 @@
+
+
+
 const myFunction = () => {
-    const produits = request('http://localhost:3000/api/teddies')
-        produits.then((teddies) => {
-            teddies.forEach((teddie) => {
-            afficheProduit(teddie)
+
+        
+    const produits = request('http://localhost:3000/api/cameras')
+        produits.then((cameras) => {
+            cameras.forEach((camera) => {
+            afficheProduit(camera) 
                                             })
                                     })
+
 }
 myFunction();
 

@@ -13,59 +13,63 @@ const getCamera = (id) => {
     
 //lien avec la page HTML
 
-let produit = document.getElementById("element_principal");
+let produitPrincipal = document.getElementById("fiche_princhipal");
 
 
 // creation structur html
 
 
-let ficheProduit = document.createElement("section");
-let elemntProduit = document.createElement("div");
-let photoProduit = document.createElement("img");
-let textProduit = document.createElement("div");
-let nameProduit = document.createElement("h2");
-let informationProduit = document.createElement("a");
-let priceProduit = document.createElement("span");
+
+let divImage = document.createElement("div");
+let photoSoloProduit = document.createElement("img");
+let renseignementProduit = document.createElement("div");
+let intitulerProduit = document.createElement("h2");
+let descriptionPrincipal = document.createElement("p")
+let selecteurOption = document.createElement("div");
+let selectObjectif = document.createElement("form");
+let selectQuantite = document.createElement("form");
+let affichePrix = document.createElement("span");
+let ajoutPanier = document.createElement("button");
+
 
 //attribut produit
 
-ficheProduit.setAttribute("class", "fiche_produit");
-elemntProduit.setAttribute("class", "elements_produits");
-ficheProduit.setAttribute("id", myCamera._id);
-//ficheProduit.setAttribute("onclick","getCamera(this.id)")
-textProduit.setAttribute("class", "text_produits");
-photoProduit.setAttribute("src", myCamera.imageUrl);
-photoProduit.setAttribute("alt", "image du produit");
-photoProduit.setAttribute("class", "image_produit");
-nameProduit.setAttribute("class", "nom_du_produit");
-informationProduit.setAttribute("class", "information_produit");
-informationProduit.setAttribute("href", "produit.html?id=" + myCamera._id)
-priceProduit.setAttribute("class", "prix_produit");
 
+
+divImage.setAttribute("class", "elements_produits");
+photoSoloProduit.setAttribute("src", myCamera.imageUrl);
+photoSoloProduit.setAttribute("alt", "image du produit");
+photoSoloProduit.setAttribute("class", "image_produit");
+renseignementProduit.setAttribute("class", "");
+intitulerProduit.setAttribute("class", "");
+descriptionPrincipal.setAttribute("class", "");
+selecteurOption.setAttribute("class", "")
+selectObjectif.setAttribute("class", "")
+selectQuantite.setAttribute("class", "")
+affichePrix.setAttribute("class", "");
+ajoutPanier.setAttribute("class", "");
 
 //agencement html
 
-produit.appendChild(contentAllProduct);
-contentAllProduct.appendChild(ficheProduit);
-ficheProduit.appendChild(elemntProduit);
-ficheProduit.appendChild(textProduit);
-elemntProduit.appendChild(photoProduit);
-textProduit.appendChild(nameProduit);
-textProduit.appendChild(informationProduit);
-textProduit.appendChild(priceProduit);
+produitPrincipal.appendChild(divImage);
+produitPrincipal.appendChild(renseignementProduit);
+divImage.appendChild(photoSoloProduit);
+renseignementProduit.appendChild(intitulerProduit);
+renseignementProduit.appendChild(descriptionPrincipal);
+renseignementProduit.appendChild(selecteurOption);
+renseignementProduit.appendChild(ajoutPanier);
+
+selecteurOption.appendChild(selectObjectif);
+selecteurOption.appendChild(selectQuantite);
+selecteurOption.appendChild(affichePrix);
 
 //contenue produit
-nameProduit.textContent = myCamera.name;
-informationProduit.textContent = "Fiche produit";
-priceProduit.textContent = myCamera.price / 100 + " euros";
+intitulerProduit.textContent = myCamera.name;
+descriptionPrincipal.textContent = myCamera.description;
+affichePrix.textContent = myCamera.price / 100 + " euros";
 
 
     });
     
         };
-        let contentAllProduct = document.createElement("div");
-
-        //attribut produit
-        
-        contentAllProduct.setAttribute("class", "enssembles_produits" );
         getCamera(myIdCamera)

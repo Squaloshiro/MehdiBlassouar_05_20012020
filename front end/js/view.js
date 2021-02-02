@@ -23,7 +23,6 @@ let priceProduit = document.createElement("span");
 ficheProduit.setAttribute("class", "fiche_produit");
 elemntProduit.setAttribute("class", "elements_produits");
 ficheProduit.setAttribute("id", camera._id);
-//ficheProduit.setAttribute("onclick","getCamera(this.id)")
 textProduit.setAttribute("class", "text_produits");
 photoProduit.setAttribute("src", camera.imageUrl);
 photoProduit.setAttribute("alt", "image du produit");

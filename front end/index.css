@@ -67,6 +67,19 @@ header {
     background-color: #f3ebf3;
 }
 
+#fiche_princhipal{
+    width: 99%;
+    height: 70%;
+    border: 1px solid rgb(177, 174, 174);
+    border-radius: 1em;
+    margin-bottom: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f3ebf3;
+}
+
 .enssembles_produits{ /*div dans la main */
     display: flex;
     flex-direction: row;
@@ -74,6 +87,12 @@ header {
     flex-flow: wrap;
     width: 99%;
     height: 100%;
+}
+
+.agencement_structure{
+display: flex;
+flex-direction: row;
+
 }
 
 .fiche_produit{ /*toute les section dans la div*/
@@ -90,8 +109,14 @@ header {
 width: 100%;
 height: 70%;
 border: 1px solid white;
-
-
+}
+.div_photo{
+    border: 1px solid rgb(209, 209, 209);;
+    width: 30em;
+    height: 15em;
+    margin: 2em;
+    border-radius: 2em;
+    overflow: hidden;
 }
 
 .image_produit{ /* img dans la div */ 
@@ -99,10 +124,25 @@ border: 1px solid white;
     height: 100%;
     object-fit: cover;
 }
+.photo_produit{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 
 .text_produits{ /* div pour le text de produit*/
 position: relative;
+}
 
+.fiche_descriptif{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+..commande{
+    border: 1px solid black;
 }
 
 .nom_du_produit{

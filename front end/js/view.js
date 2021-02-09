@@ -27,9 +27,7 @@ const afficheProduit = (camera) => {
 
     ficheProduit.setAttribute("class", "fiche_produit");
     elementClick.setAttribute("href", "produit.html?id=" + camera._id)
-    console.log('------------------------------------');
-    console.log(window.location.href);
-    console.log('------------------------------------');
+    
     elemntProduit.setAttribute("class", "elements_produits");
     ficheProduit.setAttribute("id", camera._id);
     textProduit.setAttribute("class", "text_produits");
@@ -75,14 +73,27 @@ const afficheProduit = (camera) => {
 
 
 const detailProduit = (myCamera) => {
-   let idPage = window.location.href._id
-
-   /*if(idPage != myCamera._id){
-       window.alert('rrrrrrrrrrrrrrrrr')
-   }*/
-    console.log('------------------------------------');
+   let idPage = window.location.href.indexOf('?')
+   console.log('------------------------------------');
     console.log(idPage);
     console.log('------------------------------------');
+    //if(idPage != -1){
+       let id =  myCamera._id
+       console.log('------------------------------------');
+       console.log(id);
+       console.log('------------------------------------');
+       let finUrl = window.location.href.substring(idPage + 1)
+       console.log('------------------------------------');
+       console.log(finUrl);
+       console.log('------------------------------------');
+   // }
+   if(finUrl != ('id=' + myCamera._id)){
+    window.alert('oooooooooooo')
+    let pageError = document.querySelector("#fiche_princhipal")
+    pageError.style.display = "none"
+   }
+  
+    
     //lien avec la page HTML
 
     let produitPrincipal = document.getElementById("fiche_princhipal");

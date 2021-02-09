@@ -67,6 +67,8 @@ header {
     background-color: #f3ebf3;
 }
 
+
+
 #fiche_princhipal{
     width: 99%;
     height: 70%;
@@ -80,7 +82,7 @@ header {
     background-color: #f3ebf3;
 }
 
-.enssembles_produits{ /*div dans la main */
+#enssembles_produits{ /*div dans la main */
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -133,6 +135,7 @@ border: 1px solid white;
 
 .text_produits{ /* div pour le text de produit*/
 position: relative;
+
 }
 
 .fiche_descriptif{
@@ -141,7 +144,7 @@ position: relative;
     align-items: center;
 }
 
-..commande{
+.commande{
     border: 1px solid black;
 }
 

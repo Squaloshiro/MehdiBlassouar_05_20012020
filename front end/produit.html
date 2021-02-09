@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="fr">
     <link rel="stylesheet" href="index.css">
-    
+    <link rel="shortcut icon" type="image/ico" href="img/logorinoco.ico">
     <script src="https://kit.fontawesome.com/c38b3b03f9.js" crossorigin="anonymous"></script>
     <script src="js/request.js" defer></script>
     <script src="js/produit.js"defer></script>
+    <script src="js/view.js"></script>
     
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title id="title_Page_Produit">Document</title>
 </head>
 <body>
     <div id="bloc_page">
@@ -19,16 +21,16 @@
                 <img class="logo" src="img/logorinoco.png" alt="">
             </a>
             <div class="eltnav">
-                <a class="index" href="index.html">Acceuil</a>
-                <a class="panier" href="panier.html">
+                <a class="index" href="index.html">Accueil</a>
+                <a class="panier" href="panier.html?id=">
                     <i class="fas fa-shopping-cart"></i>
-                    Panier
+                    Panier (<span id="nombre_element_panier"></span>)
                 </a>
             </div>
         </nav>
         </header>
         <main id="fiche_princhipal">
-            <h1>Bonjour</h1>
+            <h1 id="titre_Produit">Bonjour</h1>
         </main>
         <footer>
             <p>voici mon footer</p>

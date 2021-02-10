@@ -73,25 +73,20 @@ const afficheProduit = (camera) => {
 
 
 const detailProduit = (myCamera) => {
-   let idPage = window.location.href.indexOf('?')
-   console.log('------------------------------------');
-    console.log(idPage);
-    console.log('------------------------------------');
-    //if(idPage != -1){
+   /*let idPage = window.location.href.indexOf('?')
+  
+   
        let id =  myCamera._id
-       console.log('------------------------------------');
-       console.log(id);
-       console.log('------------------------------------');
+     
        let finUrl = window.location.href.substring(idPage + 1)
-       console.log('------------------------------------');
-       console.log(finUrl);
-       console.log('------------------------------------');
-   // }
+       
+  
    if(finUrl != ('id=' + myCamera._id)){
-    window.alert('oooooooooooo')
-    let pageError = document.querySelector("#fiche_princhipal")
+    window.alert('Produit indisponible')
+    let pageError = document.querySelector("#agencement_structure")
     pageError.style.display = "none"
-   }
+  
+   }*/
   
     
     //lien avec la page HTML
@@ -201,22 +196,22 @@ const detailProduit = (myCamera) => {
     
     ajoutPanier.addEventListener('click', (e) => {
     
-        const newajoutPanier = [{
+        const newajoutPanier = {
             ref: myCamera._id,
             objectif: choixObjectif.value,
-            //quantiter : selectQuantite.value,
+            quantiter : selectQuantite.value,
             nom: myCamera.name,
             description: myCamera.description,
             image : myCamera.imageUrl,
             prix : myCamera.price
-        }]
+        }
         if (local?.length) {
             local = [...local, newajoutPanier]
             localStorage.setItem("user", JSON.stringify(local))
         } else {
-            localStorage.setItem("user", JSON.stringify(newajoutPanier))
+            localStorage.setItem("user", JSON.stringify([newajoutPanier]))
         }
-        //ajoutAuPanier.textContent = local?.length?local.length:1
+        ajoutAuPanier.textContent = local?.length?local.length:1
         if(local?.length){
         ajoutAuPanier.textContent = local.length
         }else{

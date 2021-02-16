@@ -230,7 +230,7 @@ const affichePanierTableau = () => {
 
 
     let sommeTotale = 0
-    local.forEach((panier) => {
+    local?.length && local.forEach((panier) => {
         sommeTotale += panier.ref.price * panier.quantiter
     })
 
@@ -333,6 +333,28 @@ const affichePanier = (panier, index) => {
         localStorage.setItem("panier", JSON.stringify(local));
         window.location.reload();
     };
+}
+
+const affichePanierVide = () => {
+
+    let pan = document.getElementById("nombre_element_panier")
+    let blockPage = document.getElementById("bloc_page")
+    console.log('------------------------------------');
+    console.log(pan.textContent);
+    console.log('------------------------------------');
+    if (pan.textContent == 0) {
+
+        let main = document.getElementById("element_principal_Panier")
+        main.style.display = "none"
+
+        let newTitle = document.createElement("h1")
+        newTitle.textContent = "Votre panier est vide"
+        blockPage.appendChild(newTitle)
+
+        let footer = document.getElementById("footer")
+        blockPage.insertBefore(newTitle, footer);
+    }
+
 }
 
 const formmulaire = () => {

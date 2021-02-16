@@ -17,6 +17,7 @@ const lePanier = () => {
     affichePanierTableau();
     affichePanierNombre();
     formmulaire()
+    affichePanierVide()
 }
 
 

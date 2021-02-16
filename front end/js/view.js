@@ -323,10 +323,10 @@ const affichePanier = (panier, index) => {
 
 
     bouttonSupPanierUnitaire.addEventListener('click', (e) => {
-        this.supprimerUnArticle(index)
+        supprimerUnArticle(index)
     })
 
-    supprimerUnArticle = (i) => {
+    const supprimerUnArticle = (i) => {
         let local = JSON.parse(localStorage.getItem("panier"));
         local.splice(i, 1);
         localStorage.clear();
@@ -336,7 +336,94 @@ const affichePanier = (panier, index) => {
 }
 
 const formmulaire = () => {
-    document.getElementById("Inscription").addEventListener("submit", () => {
-        alert("Votre formulair a bien été envoyer")
+
+    document.getElementById("email").addEventListener("input", () => {
+        let parragrapheErreur = document.getElementById('error');
+        if (document.getElementById("email").value != document.getElementById("email2").value) {
+            parragrapheErreur.innerHTML = "Les deux adresses emails ne corespondent pas";
+        } else {
+            parragrapheErreur.innerHTML = "";
+        }
+    })
+
+    /* document.getElementById("mdp2").addEventListener("input", (e) => {
+         let parragrapheErreur = document.getElementById('error')
+         if (this.value != document.getElementById("mdp").value) {
+             parragrapheErreur.innerHTML = "Les deux mots de passe ne corespondent pas"
+         } else {
+             parragrapheErreur.innerHTML = ""
+         }
+     })*/
+
+    document.forms["inscription"].addEventListener("submit", (e) => {
+        e.preventDefault()
+        let erreure
+        let inputs = this.document.getElementsByTagName("input")
+
+        for (let i = 0; i < inputs.length; i++) {
+            console.log('------------------------------------');
+            console.log(inputs[i]);
+            console.log('------------------------------------');
+            if (!inputs[i].value) {
+                erreure = "Veulliez renseigner tous les champs !!!"
+            }
+
+        }
+
+        if (erreure) {
+            //e.preventDefault()
+            document.getElementById('error').innerHTML = erreure
+            return false
+        } else {
+            alert("Votre formulair a bien été envoyer")
+        }
+
+        /* let nom = document.getElementById("nom")
+         let prenom = document.getElementById("prenom")
+         let email = document.getElementById("email")
+         let emailConf = document.getElementById("email2")
+         let mdp = document.getElementById("mdp")
+         let mdpConf = document.getElementById("mdp2")
+     
+         if (!mdpConf.value) {
+             erreure = " votre mdp conf "
+         }
+         if (!mdp.value) {
+             erreure = " votre mdp "
+         }
+     
+         if (!emailConf.value) {
+             erreure = " votre email conf "
+         }
+         if (!email.value) {
+             erreure = " votre email "
+         }
+         if (!prenom.value) {
+             erreure = " votre prenom "
+         }
+         if (!nom.value) {
+             erreure = " votre nom "
+         }*/
+
+        /*for (let i = 0; i < inputs.length; i++) {
+            if (!inputs[i].value) {
+                erreure = "Veulliez renseigner tous les éléments"
+            }
+            else if (error) {
+                e.preventDefault()
+                document.getElementById('error').innerHTML = erreure
+                return false
+            } else {
+                alert("Votre formulair a bien été envoyer")
+            }
+     
+        }*/
+
+
+
+
+
+
+
     })
 }

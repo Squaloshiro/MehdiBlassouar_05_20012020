@@ -38,15 +38,17 @@
             <div id="element_a_sup"></div>
             <div id="formulaire">
                 <h2>Valider votre formulaire</h2>
-                <form id="Inscription">
-                    <input type="text" name="Nom" placeholder="Votre nom">
-                    <input type="text" name="Prenom" placeholder="Votre Prénom"><br>
-                    <input type="email" name="email" placeholder="Votre email">
-                    <input type="email" name="Confirmation-email" placeholder="Confirmation de l'email"><br>
-                    <input type="password" name="mdp" placeholder="Mots de passe">
-                    <input type="password" name="Confirmation mdp" placeholder="Confirmation du mots de passe"><br>
+                <form id="inscription" name="inscription">
+                    <input type="text" name="Nom" placeholder="Votre nom" id="nom">
+                    <input type="text" name="Prenom" placeholder="Votre Prénom" id="prenom"><br>
+                    <input type="email" name="email" placeholder="Votre email" id="email">
+                    <input type="email" name="Confirmation-email" placeholder="Confirmation de l'email" id="email2"><br>
+                    <input type="password" name="mdp" placeholder="Mots de passe" id="mdp">
+                    <input type="password" name="Confirmation mdp" placeholder="Confirmation du mots de passe"
+                        id="mdp2"><br>
                     <input type="submit" value="Validation">
                 </form>
+                <p style="color: red;" id="error"></p>
             </div>
         </main>
         <footer>

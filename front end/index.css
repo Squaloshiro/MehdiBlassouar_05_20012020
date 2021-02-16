@@ -179,4 +179,60 @@ footer{
     /*background-color: #f3ebf3;*/
 }
 
+/*Tabeleau Panier*/
+#element_a_sup{
+    
+    width:90% ;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.Somme_Totale{
+    margin-left: 3em;
+    margin-right: 2em;
+}
+
+#element_principal_Panier{
+    width: 99%;
+    border: 1px solid black;
+    margin-bottom: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+#tableau_panier{
+    width: 90%;
+}
+
+#titre_panier{
+    margin: 1em;
+}
+
+.button_sup_pan{
+    width: 10em;
+    height: 1.5em;
+}
+
+.button_sup_elmt{
+    width: 10em;
+    height: 1.5em;
+}
+
+
+.image_Panier{
+    width: 8em;
+    height: 8em;
+}
+
+.change_place_produit{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border: 1px solid black;
+}
 

@@ -1,14 +1,27 @@
+const error = () => {
+    //window.location.href = "server.html"
+    location.replace("server.html")
+}
+
+
+const produitIndispo = () => {
+    window.alert('Produit indisponible')
+    let pageError = document.querySelector("#agencement_structure")
+    pageError.style.display = "none"
+}
+
+
+
 
 const afficheProduit = (camera) => {
-
-
+    camera.price = priceFormat(camera.price)
     //lien avec la page HTML
 
     let produit = document.getElementById("enssembles_produits");
 
     //probele id page
 
-    
+
 
 
     // creation structur html
@@ -27,7 +40,7 @@ const afficheProduit = (camera) => {
 
     ficheProduit.setAttribute("class", "fiche_produit");
     elementClick.setAttribute("href", "produit.html?id=" + camera._id)
-    
+
     elemntProduit.setAttribute("class", "elements_produits");
     ficheProduit.setAttribute("id", camera._id);
     textProduit.setAttribute("class", "text_produits");
@@ -39,7 +52,7 @@ const afficheProduit = (camera) => {
     informationProduit.setAttribute("href", "produit.html?id=" + camera._id)
     priceProduit.setAttribute("class", "prix_produit");
 
-    
+
 
 
 
@@ -59,36 +72,17 @@ const afficheProduit = (camera) => {
     //contenue produit
     nameProduit.textContent = camera.name;
     informationProduit.textContent = "Fiche produit";
-    priceProduit.textContent = camera.price / 100 + " euros";
-    
+    priceProduit.textContent = camera.price;
+
     let local = JSON.parse(localStorage.getItem("user"))
-  
-    let indexPanier = document.querySelector('#nombre_element_panier')
-  
-    indexPanier.textContent = local?.length?local.length:0
-    
+
 }
 
 
 
 
 const detailProduit = (myCamera) => {
-   /*let idPage = window.location.href.indexOf('?')
-  
-   
-       let id =  myCamera._id
-     
-       let finUrl = window.location.href.substring(idPage + 1)
-       
-  
-   if(finUrl != ('id=' + myCamera._id)){
-    window.alert('Produit indisponible')
-    let pageError = document.querySelector("#agencement_structure")
-    pageError.style.display = "none"
-  
-   }*/
-  
-    
+
     //lien avec la page HTML
 
     let produitPrincipal = document.getElementById("fiche_princhipal");
@@ -130,7 +124,7 @@ const detailProduit = (myCamera) => {
     selectQuantite.setAttribute("id", "select_option")
     ajoutPanier.setAttribute("class", "ajout au panier")
     ajoutPanier.setAttribute("type", "button")
-    ajoutPanier.setAttribute("value", "Ajouter au panier" + myCamera.price / 100 + " euros")
+    ajoutPanier.setAttribute("value", "Ajouter au panier" + priceFormat(myCamera.price))
 
 
 
@@ -150,11 +144,11 @@ const detailProduit = (myCamera) => {
     selecteurOption.appendChild(affichePrix);
 
     //contenue produit
-    
+
     titleProduit.textContent = myCamera.name;
     titreProduit.textContent = myCamera.name;
     descriptionPrincipal.textContent = myCamera.description;
-    affichePrix.textContent = myCamera.price / 100 + " euros";
+    affichePrix.textContent = priceFormat(myCamera.price);
 
 
     myCamera.lenses.forEach((lenses) => {
@@ -167,106 +161,182 @@ const detailProduit = (myCamera) => {
 
     let quantiter = [...Array(25).keys()].map(i => i + 1);
 
-
-
     quantiter.forEach((qte) => {
+
         let tableauQuantite = document.createElement("option");
         tableauQuantite.setAttribute("value", qte)
-
         document
             .getElementById("select_option")
             .appendChild(tableauQuantite).innerHTML = qte;
-
-        selectQuantite.addEventListener('change', (event) => {
-
-            ajoutPanier.value = "Ajouter au panier" + myCamera.price / 100 * event.target.value + " euros"
-
-        });
-
     })
 
 
 
-    let boutonPanier = document.querySelector('#commande') + myCamera._id
+
+    selectQuantite.addEventListener('change', (event) => {
+
+        ajoutPanier.value = "Ajouter au panier " + priceFormat(myCamera.price * event.target.value)
+
+    });
+
     let choixObjectif = document.getElementById("select")
     let ajoutAuPanier = document.querySelector('#nombre_element_panier');
 
 
-    let local = JSON.parse(localStorage.getItem("user"))
-    
+    let local = JSON.parse(localStorage.getItem("panier"))
+
     ajoutPanier.addEventListener('click', (e) => {
-    
+
         const newajoutPanier = {
-            ref: myCamera._id,
+            ref: myCamera,//._id,
             objectif: choixObjectif.value,
-            quantiter : selectQuantite.value,
-            nom: myCamera.name,
-            description: myCamera.description,
-            image : myCamera.imageUrl,
-            prix : myCamera.price
+            quantiter: selectQuantite.value,
+            //nom: myCamera.name,
+            //description: myCamera.description,
+            //image: myCamera.imageUrl,
+            //prix: myCamera.price = priceFormat(myCamera.price)
         }
         if (local?.length) {
             local = [...local, newajoutPanier]
-            localStorage.setItem("user", JSON.stringify(local))
+            localStorage.setItem("panier", JSON.stringify(local))
         } else {
-            localStorage.setItem("user", JSON.stringify([newajoutPanier]))
+            localStorage.setItem("panier", JSON.stringify([newajoutPanier]))
         }
-        ajoutAuPanier.textContent = local?.length?local.length:1
-        if(local?.length){
-        ajoutAuPanier.textContent = local.length
-        }else{
-        ajoutAuPanier.textContent = 0
-        document.location.reload()
+        //local?.length ? local.length : 0
+        if (local?.length) {
+            ajoutAuPanier.textContent = local.length
+        } else {
+            ajoutAuPanier.textContent = 1
+            document.location.reload()
+
         }
     })
-    ajoutAuPanier.textContent = local?.length?local.length:0
 }
 
 
-const affichePanier = (panier) => {
-    let local = JSON.parse(localStorage.getItem("user"))
+const affichePanierTableau = () => {
+    let local = JSON.parse(localStorage.getItem("panier"))
+    let tablePanier = document.getElementById("element_a_sup")
+
+    let bouttonSupPanier = document.createElement("input")
+    let totalPanier = document.createElement("span")
 
 
 
-    for(let i = 0 ;i < panier.length; i++){
-        
-    let produitPanier = document.getElementById('element_principal_Panier')
+    bouttonSupPanier.setAttribute("type", "button")
+    bouttonSupPanier.setAttribute("class", "button_sup_pan")
+    bouttonSupPanier.setAttribute("value", "Supprimer le panier")
+    totalPanier.setAttribute("class", "Somme_Totale")
 
 
-// creation structur html
+    let sommeTotale = 0
+    local.forEach((panier) => {
+        sommeTotale += panier.ref.price * panier.quantiter
+    })
+
+    totalPanier.textContent = "Somme total : " + priceFormat(sommeTotale)
+
+    tablePanier.appendChild(bouttonSupPanier)
+    tablePanier.appendChild(totalPanier)
 
 
-let sectionPrincipal = document.createElement("section");
-let divImagePanier = document.createElement("div");
-let photoPanier = document.createElement("img");
-let renseignementProduitPanier = document.createElement("div");
-let nameProduitPanier = document.createElement("h2");
-let descriptionProduitPanier = document.createElement("p")
-let afficheObjectif = document.createElement("span");
-let affichePrixPanier = document.createElement("span");
-photoPanier.setAttribute("src", panier[i].image);
-//agencement html
 
-produitPanier.appendChild(sectionPrincipal);
-sectionPrincipal.appendChild(divImagePanier);
-sectionPrincipal.appendChild(renseignementProduitPanier);
-sectionPrincipal.appendChild(afficheObjectif);
-sectionPrincipal.appendChild(affichePrixPanier);
-divImagePanier.appendChild(photoPanier);
-renseignementProduitPanier.appendChild(nameProduitPanier);
-renseignementProduitPanier.appendChild(descriptionProduitPanier);
+    bouttonSupPanier.addEventListener('click', (e) => {
+        localStorage.removeItem("panier")
+        window.location.reload();
+    })
 
-//contenue produit
-nameProduitPanier.textContent = panier[i].nom
-descriptionProduitPanier.textContent = panier[i].description
-afficheObjectif.textContent = panier[i].objectif
-affichePrixPanier.textContent = panier[i].prix
 }
 
+const affichePanier = (panier, index) => {
 
-  
-    let indexPanier = document.querySelector('#nombre_element_panier')
-  
-    indexPanier.textContent = local?.length?local.length:0
 
+
+    let tablePanier = document.getElementById("tableau_panier")
+
+
+
+
+
+
+    // creation structur html
+
+    let ligneTitre = document.createElement("tr")
+
+
+
+    let ligneProduit = document.createElement("tr")
+    let elementImg = document.createElement("td")
+    let imgPanier = document.createElement("img")
+    imgPanier.setAttribute("src", panier.ref.imageUrl);
+    imgPanier.setAttribute("class", "image_Panier");
+    ligneProduit.setAttribute("class", "change_place_produit")
+
+    let elementTitre = document.createElement("td")
+    let titrePanier = document.createElement("h2")
+    ligneTitre.setAttribute("class", "change_place_titre")
+
+    let elementObjectif = document.createElement("td")
+    let objectifPanier = document.createElement("p")
+
+    let elementQuantite = document.createElement("td")
+    let quantiterProduit = document.createElement("span")
+
+    let elementPrixUnitaire = document.createElement("td")
+    let prixUnitaire = document.createElement("span")
+
+    let elementPrixTotal = document.createElement("td")
+    let prixTotal = document.createElement("span")
+
+    let elementSupUnitaire = document.createElement("td")
+    let bouttonSupPanierUnitaire = document.createElement("input")
+    bouttonSupPanierUnitaire.setAttribute("type", "button")
+    bouttonSupPanierUnitaire.setAttribute("id", "button_sup_elmt")
+    bouttonSupPanierUnitaire.setAttribute("value", "Supprimer ce produit")
+
+
+
+
+
+    tablePanier.appendChild(ligneProduit)
+    ligneProduit.appendChild(elementImg)
+    elementImg.appendChild(imgPanier)
+
+    ligneProduit.appendChild(elementTitre)
+    elementTitre.appendChild(titrePanier)
+    ligneProduit.appendChild(elementObjectif)
+    elementObjectif.appendChild(objectifPanier)
+    ligneProduit.appendChild(elementQuantite)
+    elementQuantite.appendChild(quantiterProduit)
+    ligneProduit.appendChild(elementPrixUnitaire)
+    elementPrixUnitaire.appendChild(prixUnitaire)
+    ligneProduit.appendChild(elementPrixTotal)
+    elementPrixTotal.appendChild(prixTotal)
+    ligneProduit.appendChild(elementSupUnitaire)
+    elementSupUnitaire.appendChild(bouttonSupPanierUnitaire)
+
+
+    titrePanier.textContent = panier.ref.name
+    quantiterProduit.textContent = "Quantiter : " + panier.quantiter
+    objectifPanier.textContent = "objectif : " + panier.objectif
+    prixUnitaire.textContent = "Prix total : " + priceFormat(panier.ref.price * panier.quantiter)
+
+
+    bouttonSupPanierUnitaire.addEventListener('click', (e) => {
+        this.supprimerUnArticle(index)
+    })
+
+    supprimerUnArticle = (i) => {
+        let local = JSON.parse(localStorage.getItem("panier"));
+        local.splice(i, 1);
+        localStorage.clear();
+        localStorage.setItem("panier", JSON.stringify(local));
+        window.location.reload();
+    };
+}
+
+const formmulaire = () => {
+    document.getElementById("Inscription").addEventListener("submit", () => {
+        alert("Votre formulair a bien été envoyer")
+    })
 }

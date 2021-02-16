@@ -3,12 +3,14 @@ const request = async (url) => {
         let response = await fetch(url);
         let data = await response.json();
         return data;;
-        
+
     } catch (error) {
-        window.location.href = "server.html"
+        return "Probleme server"
     }
-    
+
 }
-console.log('------------------------------------');
-console.log(request);
-console.log('------------------------------------');
+const affichePanierNombre = () => {
+    let local = JSON.parse(localStorage.getItem("panier"))
+    let indexPanier = document.querySelector('#nombre_element_panier')
+    indexPanier.textContent = local?.length ? local.length : 0
+}

@@ -1,38 +1,60 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <link rel="stylesheet" href="index.css">
-    <link rel="shortcut icon" type="image/ico" href="img/logorinoco.ico">
-    <script src="https://kit.fontawesome.com/c38b3b03f9.js" crossorigin="anonymous"></script>
-    
-    <script src="js/view.js"defer></script>
-    <script src="js/panier.js"defer></script>
+<link rel="stylesheet" href="index.css">
+<link rel="shortcut icon" type="image/ico" href="img/logorinoco.ico">
+<script src="https://kit.fontawesome.com/c38b3b03f9.js" crossorigin="anonymous"></script>
+<script src="js/request.js" defer></script>
+<script src="js/helper.js" defer></script>
+
+<script src="js/view.js" defer></script>
+<script src="js/panier.js" defer></script>
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orinoco, récapitulatif de votre commande</title>
 </head>
+
 <body>
     <div id="bloc_page">
         <header>
             <nav class="navbar">
-            <a class="logolink" href="index.html">
-                <img class="logo" src="img/logorinoco.png" alt="">
-            </a>
-            <div class="eltnav">
-                <a class="index" href="index.html">Accueil</a>
-                <a class="panier" href="panier.html?id=">
-                    <i class="fas fa-shopping-cart"></i>
-                    Panier (<span id="nombre_element_panier" ></span>)
+                <a class="logolink" href="index.html">
+                    <img class="logo" src="img/logorinoco.png" alt="">
                 </a>
-            </div>
-        </nav>
+                <div class="eltnav">
+                    <a class="index" href="index.html">Accueil</a>
+                    <a class="panier" href="panier.html?id=">
+                        <i class="fas fa-shopping-cart"></i>
+                        Panier (<span id="nombre_element_panier"></span>)
+                    </a>
+                </div>
+            </nav>
         </header>
         <main id="element_principal_Panier">
-            <h1>ce produit est indisponible</h1>
+            <h1 id="titre_panier">Orinoco, récapitulatif de votre commande</h1>
+            <table id="tableau_panier"></table>
+            <div id="element_a_sup"></div>
+            <div id="formulaire">
+                <h2>Valider votre formulaire</h2>
+                <form id="Inscription">
+                    <input type="text" name="Nom" placeholder="Votre nom">
+                    <input type="text" name="Prenom" placeholder="Votre Prénom"><br>
+                    <input type="email" name="email" placeholder="Votre email">
+                    <input type="email" name="Confirmation-email" placeholder="Confirmation de l'email"><br>
+                    <input type="password" name="mdp" placeholder="Mots de passe">
+                    <input type="password" name="Confirmation mdp" placeholder="Confirmation du mots de passe"><br>
+                    <input type="submit" value="Validation">
+                </form>
+            </div>
         </main>
         <footer>
             <p>voici mon footer</p>
         </footer>
+
     </div>
+
 </body>
+
 </html>

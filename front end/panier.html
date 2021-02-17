@@ -40,12 +40,14 @@
                 <h2>Valider votre formulaire</h2>
                 <form id="inscription" name="inscription">
                     <input type="text" name="Nom" placeholder="Votre nom" id="nom">
-                    <input type="text" name="Prenom" placeholder="Votre Prénom" id="prenom"><br>
+                    <input type="text" name="Prenom" placeholder="Votre prénom" id="prenom">
+                    <span id="nom_prénom"></span><br>
                     <input type="email" name="email" placeholder="Votre email" id="email">
-                    <input type="email" name="Confirmation-email" placeholder="Confirmation de l'email" id="email2"><br>
-                    <input type="password" name="mdp" placeholder="Mots de passe" id="mdp">
-                    <input type="password" name="Confirmation mdp" placeholder="Confirmation du mots de passe"
-                        id="mdp2"><br>
+                    <input type="email" name="Confirmation_email" placeholder="Confirmation de l'email" id="email2">
+                    <span id="email_manquant"></span><br>
+                    <input type="password" name="mdp" placeholder="Mot de passe" id="mdp">
+                    <input type="password" name="Confirmation_mdp" placeholder="Confirmation du mot de passe" id="mdp2">
+                    <span id="mdp_incorect"></span><br>
                     <input type="submit" value="Validation">
                 </form>
                 <p style="color: red;" id="error"></p>

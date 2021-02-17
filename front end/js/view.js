@@ -1,6 +1,6 @@
 const error = () => {
     //window.location.href = "server.html"
-    location.replace("server.html")
+    window.location.replace("server.html")
 }
 
 
@@ -234,7 +234,7 @@ const affichePanierTableau = () => {
         sommeTotale += panier.ref.price * panier.quantiter
     })
 
-    totalPanier.textContent = "Somme total : " + priceFormat(sommeTotale)
+    totalPanier.textContent = "Somme totale : " + priceFormat(sommeTotale)
 
     tablePanier.appendChild(bouttonSupPanier)
     tablePanier.appendChild(totalPanier)
@@ -317,7 +317,7 @@ const affichePanier = (panier, index) => {
 
 
     titrePanier.textContent = panier.ref.name
-    quantiterProduit.textContent = "Quantiter : " + panier.quantiter
+    quantiterProduit.textContent = "Quantité : " + panier.quantiter
     objectifPanier.textContent = "objectif : " + panier.objectif
     prixUnitaire.textContent = "Prix total : " + priceFormat(panier.ref.price * panier.quantiter)
 
@@ -359,29 +359,106 @@ const affichePanierVide = () => {
 
 const formmulaire = () => {
 
-    document.getElementById("email").addEventListener("input", () => {
-        let parragrapheErreur = document.getElementById('error');
-        if (document.getElementById("email").value != document.getElementById("email2").value) {
-            parragrapheErreur.innerHTML = "Les deux adresses emails ne corespondent pas";
-        } else {
-            parragrapheErreur.innerHTML = "";
-        }
-    })
-
-    /* document.getElementById("mdp2").addEventListener("input", (e) => {
-         let parragrapheErreur = document.getElementById('error')
-         if (this.value != document.getElementById("mdp").value) {
-             parragrapheErreur.innerHTML = "Les deux mots de passe ne corespondent pas"
-         } else {
-             parragrapheErreur.innerHTML = ""
-         }
-     })*/
-
+    let nomPrenom = document.getElementById("nom_prénom");
+    let emailError = document.getElementById("email_manquant");
+    let mdpError = document.getElementById("mdp_incorect");
+    let caraPrenom = /^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?/
     document.forms["inscription"].addEventListener("submit", (e) => {
-        e.preventDefault()
-        let erreure
+        // e.preventDefault();
+        //let erreure
         let inputs = this.document.getElementsByTagName("input")
 
+        if (!inputs["Prenom"].value) {
+
+            e.preventDefault();
+            nomPrenom.textContent = "Prénom manquant";
+            nomPrenom.style.color = "red"
+
+        } else if (caraPrenom.test(inputs["Prenom"].value) == false) {
+
+            e.preventDefault();
+            nomPrenom.textContent = "Format incorect";
+            nomPrenom.style.color = "orange"
+
+        } else if (!inputs["Nom"].value) {
+
+            e.preventDefault();
+            nomPrenom.textContent = "Nom manquant";
+            nomPrenom.style.color = "red"
+
+        } else if (caraPrenom.test(inputs["Nom"].value) == false) {
+
+            e.preventDefault();
+            nomPrenom.textContent = "Format incorect";
+            nomPrenom.style.color = "orange"
+
+        } else if (!inputs["email"].value) {
+
+            e.preventDefault();
+            emailError.textContent = "Email manquant";
+            emailError.style.color = "red"
+
+        } else if (!inputs["Confirmation_email"].value) {
+
+            e.preventDefault();
+            emailError.textContent = "Confirmation email manquant";
+            emailError.style.color = "red"
+
+        } else if (inputs["email"].value != inputs["Confirmation_email"].value) {
+
+            e.preventDefault();
+            emailError.textContent = "Les deux adresses emails ne corespondent pas";
+            emailError.style.color = "orange"
+
+        } else if (!inputs["mdp"].value) {
+
+            mdpError.textContent = "mot de passe manquant";
+            mdpError.style.color = "red"
+
+        } else if (!inputs["Confirmation_mdp"].value) {
+
+            mdpError.textContent = "confirmation mot de passe manquant";
+            mdpError.style.color = "red"
+
+        } else if (inputs["mdp"].value != inputs["Confirmation_mdp"].value) {
+
+            e.preventDefault();
+            mdpError.textContent = "Les deux mots de passe ne corespondent pas";
+            mdpError.style.color = "orange"
+
+        } else {
+            alert("Votre formulair a bien été envoyer")
+        }
+    })
+}
+/*document.getElementById("email").addEventListener("input", () => {
+               let parragrapheErreur = document.getElementById('error');
+               if (document.getElementById("email").value != document.getElementById("email2").value) {
+                   parragrapheErreur.innerHTML = "Les deux adresses emails ne corespondent pas";
+               } else {
+                   parragrapheErreur.innerHTML = "";
+               }
+           })
+       
+           document.getElementById("mdp2").addEventListener("input", (e) => {
+               let parragrapheErreur = document.getElementById('error')
+               if (this.value != document.getElementById("mdp").value) {
+                   parragrapheErreur.innerHTML = "Les deux mots de passe ne corespondent pas"
+               } else {
+                   parragrapheErreur.innerHTML = ""
+               }
+           })*/
+
+
+        /*if (erreure) {
+            //e.preventDefault()
+            document.getElementById('error').innerHTML = erreure
+            return false
+        } else {
+            alert("Votre formulair a bien été envoyer")
+        }*/
+
+        /*
         for (let i = 0; i < inputs.length; i++) {
             console.log('------------------------------------');
             console.log(inputs[i]);
@@ -391,16 +468,8 @@ const formmulaire = () => {
             }
 
         }
-
-        if (erreure) {
-            //e.preventDefault()
-            document.getElementById('error').innerHTML = erreure
-            return false
-        } else {
-            alert("Votre formulair a bien été envoyer")
-        }
-
-        /* let nom = document.getElementById("nom")
+        
+        let nom = document.getElementById("nom")
          let prenom = document.getElementById("prenom")
          let email = document.getElementById("email")
          let emailConf = document.getElementById("email2")
@@ -440,12 +509,3 @@ const formmulaire = () => {
             }
      
         }*/
-
-
-
-
-
-
-
-    })
-}

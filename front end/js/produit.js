@@ -4,16 +4,19 @@ const getCamera = () => {
 
     id = id.get('id')
 
-
     const theCamera = request(`http://localhost:3000/api/cameras/${id}`);
 
     theCamera.then((myCamera) => {
         if (myCamera === "Probleme server") {
+            load()
+        } /*else if (load() === myCamera) {
             error()
-        } else if (!myCamera._id) {
+        }*/ else if (!myCamera._id) {
             produitIndispo()
         } else {
             detailProduit(myCamera);
+
+
         }
     })
     affichePanierNombre()

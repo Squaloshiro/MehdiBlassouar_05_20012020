@@ -9,8 +9,3 @@ const request = async (url) => {
     }
 
 }
-const affichePanierNombre = () => {
-    let local = JSON.parse(localStorage.getItem("panier"))
-    let indexPanier = document.querySelector('#nombre_element_panier')
-    indexPanier.textContent = local?.length ? local.length : 0
-}

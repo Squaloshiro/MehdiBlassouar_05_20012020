@@ -3,12 +3,10 @@ const error = () => {
     window.location.replace("server.html")
 }
 
-
-const produitIndispo = () => {
-    window.alert('Produit indisponible')
-    let pageError = document.querySelector("#agencement_structure")
-    pageError.style.display = "none"
-}
+const load = () => {
+    let spinner = document.querySelector(".loadcontent");
+    spinner.className += " load_server";
+    };
 
 
 
@@ -180,71 +178,75 @@ const detailProduit = (myCamera) => {
     });
 
     let choixObjectif = document.getElementById("select")
-    let ajoutAuPanier = document.querySelector('#nombre_element_panier');
-
-
-    let local = JSON.parse(localStorage.getItem("panier"))
 
     ajoutPanier.addEventListener('click', (e) => {
-
-        const newajoutPanier = {
-            ref: myCamera,//._id,
+        let local = JSON.parse(localStorage.getItem("panier"))
+        let newajoutPanier = {
+            ref: myCamera,
             objectif: choixObjectif.value,
             quantiter: selectQuantite.value,
-            //nom: myCamera.name,
-            //description: myCamera.description,
-            //image: myCamera.imageUrl,
-            //prix: myCamera.price = priceFormat(myCamera.price)
+            
         }
-        if (local?.length) {
-            local = [...local, newajoutPanier]
-            localStorage.setItem("panier", JSON.stringify(local))
-        } else {
-            localStorage.setItem("panier", JSON.stringify([newajoutPanier]))
-        }
-        //local?.length ? local.length : 0
-        if (local?.length) {
-            ajoutAuPanier.textContent = local.length
-        } else {
-            ajoutAuPanier.textContent = 1
-            document.location.reload()
-
-        }
+        appelLocal(newajoutPanier, local)
+        affichePanierNombre()
     })
+    
+}
+
+const appelLocal=(newajoutPanier, local )=>{
+    if (local?.length) {
+        local = [...local, newajoutPanier]
+        localStorage.setItem("panier", JSON.stringify(local))
+    } else {
+        localStorage.setItem("panier", JSON.stringify([newajoutPanier]))
+    }
+    
+}
+const affichePanierNombre = () => {
+    let local = JSON.parse(localStorage.getItem("panier"))
+    let indexPanier = document.querySelector('#nombre_element_panier')
+    indexPanier.textContent = local?.length ? local.length : 0
 }
 
 
-const affichePanierTableau = () => {
-    let local = JSON.parse(localStorage.getItem("panier"))
-    let tablePanier = document.getElementById("element_a_sup")
 
+const affichePanierTableau = () => {
+
+    let tablePanier = document.getElementById("element_a_sup")
     let bouttonSupPanier = document.createElement("input")
     let totalPanier = document.createElement("span")
-
-
 
     bouttonSupPanier.setAttribute("type", "button")
     bouttonSupPanier.setAttribute("class", "button_sup_pan")
     bouttonSupPanier.setAttribute("value", "Supprimer le panier")
     totalPanier.setAttribute("class", "Somme_Totale")
 
+    tablePanier.appendChild(bouttonSupPanier)
+    tablePanier.appendChild(totalPanier)
+    
+    bouttonSupPanier.addEventListener('click', () => {
+    
+        localStorage.removeItem("panier")
+    
+        let tousSup = document.querySelector("#tableau_panier")
+        
+        tousSup.parentNode.removeChild(tousSup)
+        affichePanierNombre()
+        affichePanierVide()
 
+    })
+}
+
+
+const sommeTotaleFonction =()=>{
+    let local = JSON.parse(localStorage.getItem("panier"))
     let sommeTotale = 0
+
+    let totalPanier = document.querySelector(".Somme_Totale")
     local?.length && local.forEach((panier) => {
         sommeTotale += panier.ref.price * panier.quantiter
     })
-
     totalPanier.textContent = "Somme totale : " + priceFormat(sommeTotale)
-
-    tablePanier.appendChild(bouttonSupPanier)
-    tablePanier.appendChild(totalPanier)
-
-
-
-    bouttonSupPanier.addEventListener('click', (e) => {
-        localStorage.removeItem("panier")
-        window.location.reload();
-    })
 
 }
 
@@ -253,11 +255,6 @@ const affichePanier = (panier, index) => {
 
 
     let tablePanier = document.getElementById("tableau_panier")
-
-
-
-
-
 
     // creation structur html
 
@@ -275,6 +272,7 @@ const affichePanier = (panier, index) => {
     let elementTitre = document.createElement("td")
     let titrePanier = document.createElement("h2")
     ligneTitre.setAttribute("class", "change_place_titre")
+    ligneProduit.setAttribute("id", index)
 
     let elementObjectif = document.createElement("td")
     let objectifPanier = document.createElement("p")
@@ -293,9 +291,6 @@ const affichePanier = (panier, index) => {
     bouttonSupPanierUnitaire.setAttribute("type", "button")
     bouttonSupPanierUnitaire.setAttribute("id", "button_sup_elmt")
     bouttonSupPanierUnitaire.setAttribute("value", "Supprimer ce produit")
-
-
-
 
 
     tablePanier.appendChild(ligneProduit)
@@ -323,17 +318,31 @@ const affichePanier = (panier, index) => {
 
 
     bouttonSupPanierUnitaire.addEventListener('click', (e) => {
+        
         supprimerUnArticle(index)
+        ligneProduit = document.getElementById(index)
+        ligneProduit.parentNode.removeChild(ligneProduit)
+        affichePanierNombre()
+        sommeTotaleFonction()
+        affichePanierVide()
     })
 
-    const supprimerUnArticle = (i) => {
-        let local = JSON.parse(localStorage.getItem("panier"));
-        local.splice(i, 1);
-        localStorage.clear();
-        localStorage.setItem("panier", JSON.stringify(local));
-        window.location.reload();
-    };
+    
 }
+
+
+const supprimerUnArticle = (i) => {
+
+    let local = JSON.parse(localStorage.getItem("panier"));
+    local.splice(i, 1);
+    localStorage.clear();
+    localStorage.setItem("panier", JSON.stringify(local));
+
+};
+
+
+
+
 
 const affichePanierVide = () => {
 
@@ -359,77 +368,113 @@ const affichePanierVide = () => {
 
 const formmulaire = () => {
 
-    let nomPrenom = document.getElementById("nom_prénom");
+    let nom = document.getElementById("nom");
+    let prenom = document.getElementById("prenom");
     let emailError = document.getElementById("email_manquant");
-    let mdpError = document.getElementById("mdp_incorect");
+    let adresseError = document.getElementById("adresse_manquante");
+    let cityError = document.getElementById("ville_manquante");
+    let inputs = this.document.getElementsByTagName("input")
+    let erreur = document.getElementById("error")
+    
     let caraPrenom = /^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?/
-    document.forms["inscription"].addEventListener("submit", (e) => {
-        // e.preventDefault();
-        //let erreure
-        let inputs = this.document.getElementsByTagName("input")
 
-        if (!inputs["Prenom"].value) {
+    document.forms["inscription"]["Nom"].addEventListener("input", (e) => {
+
+        if (!inputs["Nom"].value) {
 
             e.preventDefault();
-            nomPrenom.textContent = "Prénom manquant";
-            nomPrenom.style.color = "red"
-
-        } else if (caraPrenom.test(inputs["Prenom"].value) == false) {
-
-            e.preventDefault();
-            nomPrenom.textContent = "Format incorect";
-            nomPrenom.style.color = "orange"
-
-        } else if (!inputs["Nom"].value) {
-
-            e.preventDefault();
-            nomPrenom.textContent = "Nom manquant";
-            nomPrenom.style.color = "red"
+            nom.textContent = "Nom manquant";
+            nom.style.color = "red"
 
         } else if (caraPrenom.test(inputs["Nom"].value) == false) {
 
             e.preventDefault();
-            nomPrenom.textContent = "Format incorect";
-            nomPrenom.style.color = "orange"
+            nom.textContent = "Format incorect";
+            nom.style.color = "orange"
 
-        } else if (!inputs["email"].value) {
+        }else{
+            nom.textContent = ""
+        }
+    })
+    document.forms["inscription"]["Prenom"].addEventListener("input", (e) => {
+        
+
+        if (!inputs["Prenom"].value) {
+
+            e.preventDefault();
+            prenom.textContent = "Prénom manquant";
+            prenom.style.color = "red"
+
+        } else if (caraPrenom.test(inputs["Prenom"].value) == false) {
+
+            e.preventDefault();
+            prenom.textContent = "Format incorect";
+            prenom.style.color = "orange"
+
+        }else{
+            prenom.textContent = ""
+        }
+
+    })
+
+    
+    document.forms["inscription"]["email"].addEventListener("input", (e) => {
+
+        if (!inputs["email"].value) {
 
             e.preventDefault();
             emailError.textContent = "Email manquant";
             emailError.style.color = "red"
 
-        } else if (!inputs["Confirmation_email"].value) {
-
-            e.preventDefault();
-            emailError.textContent = "Confirmation email manquant";
-            emailError.style.color = "red"
-
-        } else if (inputs["email"].value != inputs["Confirmation_email"].value) {
-
-            e.preventDefault();
-            emailError.textContent = "Les deux adresses emails ne corespondent pas";
-            emailError.style.color = "orange"
-
-        } else if (!inputs["mdp"].value) {
-
-            mdpError.textContent = "mot de passe manquant";
-            mdpError.style.color = "red"
-
-        } else if (!inputs["Confirmation_mdp"].value) {
-
-            mdpError.textContent = "confirmation mot de passe manquant";
-            mdpError.style.color = "red"
-
-        } else if (inputs["mdp"].value != inputs["Confirmation_mdp"].value) {
-
-            e.preventDefault();
-            mdpError.textContent = "Les deux mots de passe ne corespondent pas";
-            mdpError.style.color = "orange"
-
-        } else {
-            alert("Votre formulair a bien été envoyer")
+        }else{
+            emailError.textContent = ""
         }
     })
+    document.forms["inscription"]["adresse"].addEventListener("input", (e) => {
+
+        if (!inputs["adresse"].value) {
+
+            e.preventDefault();
+            adresseError.textContent = "adresse manquante";
+            adresseError.style.color = "red"
+
+        } else{
+            adresseError.textContent = ""
+        }
+    })
+    document.forms["inscription"]["ville"].addEventListener("input", (e) => {
+
+        if (!inputs["ville"].value) {
+
+            cityError.textContent = "ville manquante";
+            cityError.style.color = "red"
+
+        } else{
+            cityError.textContent = ""
+        }
+    })
+
+    document.forms["inscription"].addEventListener("submit", (e) => {
+        let erreur
+        let inputs = this.document.getElementsByTagName("input")
+
+        for (let i = 0; i < inputs.length; i++) {
+            console.log('------------------------------------');
+            console.log(inputs[i]);
+            console.log('------------------------------------');
+            if (!inputs[i].value) {
+                erreur = "Veulliez renseigner tous les champs !!!"
+            }
+    }
+    if (erreur) {
+        e.preventDefault()
+        document.getElementById('error').innerHTML = erreur
+        document.getElementById('error').style.color = "red"
+        return false
+    } else {
+        alert("Votre formulair a bien été envoyer")
+    }
+})
 }
 /*document.getElementById("email").addEventListener("input", () => {
                let parragrapheErreur = document.getElementById('error');

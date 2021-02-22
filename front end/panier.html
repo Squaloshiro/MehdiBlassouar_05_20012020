@@ -38,15 +38,16 @@
             <div id="element_a_sup"></div>
             <div id="formulaire">
                 <h2>Valider votre formulaire</h2>
-                <form id="inscription" name="inscription">
-                    <input type="text" name="Nom" placeholder="Votre nom" id="nom_input"><span id="nom"></span><br>
+                <form id="inscription" name="inscription" method="POST">
+                    <input type="text" name="Nom" placeholder="Votre nom" id="nom_input"><span class="verification"
+                        id="nom"></span><br>
                     <input type="text" name="Prenom" placeholder="Votre prénom" id="prenom_input"><span
-                        id="prenom"></span><br>
-                    <input type="email" name="email" placeholder="Votre email" id="email"><span
+                        class="verification" id="prenom"></span><br>
+                    <input type="email" name="email" placeholder="Votre email" id="email"><span class="verification"
                         id="email_manquant"></span><br>
-                    <input type="text" name="adresse" placeholder="Adresse" id="adresse"><span
+                    <input type="text" name="adresse" placeholder="Adresse" id="adresse"><span class="verification"
                         id="adresse_manquante"></span><br>
-                    <input type="text" name="ville" placeholder="ville" id="ville"><span
+                    <input type="text" name="ville" placeholder="ville" id="ville"><span class="verification"
                         id="ville_manquante"></span><br>
 
                     <input type="submit" value="Validation">

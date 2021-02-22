@@ -6,7 +6,7 @@ const error = () => {
 const load = () => {
     let spinner = document.querySelector(".loadcontent");
     spinner.className += " load_server";
-    };
+};
 
 
 
@@ -185,22 +185,22 @@ const detailProduit = (myCamera) => {
             ref: myCamera,
             objectif: choixObjectif.value,
             quantiter: selectQuantite.value,
-            
+
         }
         appelLocal(newajoutPanier, local)
         affichePanierNombre()
     })
-    
+
 }
 
-const appelLocal=(newajoutPanier, local )=>{
+const appelLocal = (newajoutPanier, local) => {
     if (local?.length) {
         local = [...local, newajoutPanier]
         localStorage.setItem("panier", JSON.stringify(local))
     } else {
         localStorage.setItem("panier", JSON.stringify([newajoutPanier]))
     }
-    
+
 }
 const affichePanierNombre = () => {
     let local = JSON.parse(localStorage.getItem("panier"))
@@ -223,13 +223,13 @@ const affichePanierTableau = () => {
 
     tablePanier.appendChild(bouttonSupPanier)
     tablePanier.appendChild(totalPanier)
-    
+
     bouttonSupPanier.addEventListener('click', () => {
-    
+
         localStorage.removeItem("panier")
-    
+
         let tousSup = document.querySelector("#tableau_panier")
-        
+
         tousSup.parentNode.removeChild(tousSup)
         affichePanierNombre()
         affichePanierVide()
@@ -238,7 +238,7 @@ const affichePanierTableau = () => {
 }
 
 
-const sommeTotaleFonction =()=>{
+const sommeTotaleFonction = () => {
     let local = JSON.parse(localStorage.getItem("panier"))
     let sommeTotale = 0
 
@@ -318,7 +318,7 @@ const affichePanier = (panier, index) => {
 
 
     bouttonSupPanierUnitaire.addEventListener('click', (e) => {
-        
+
         supprimerUnArticle(index)
         ligneProduit = document.getElementById(index)
         ligneProduit.parentNode.removeChild(ligneProduit)
@@ -327,11 +327,14 @@ const affichePanier = (panier, index) => {
         affichePanierVide()
     })
 
-    
+
 }
 
 
 const supprimerUnArticle = (i) => {
+    console.log('------------testttttttttt------------------------');
+    console.log(i);
+    console.log('------------------------------------');
 
     let local = JSON.parse(localStorage.getItem("panier"));
     local.splice(i, 1);
@@ -368,88 +371,95 @@ const affichePanierVide = () => {
 
 const formmulaire = () => {
 
+    let verifNombre = /[0-9]/;
+    let verifMail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let verifCharacter = /[§!@#$%^&*().?":{}|<>]/;
+    let autreVerifchara = /^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?/
+
+
     let nom = document.getElementById("nom");
     let prenom = document.getElementById("prenom");
     let emailError = document.getElementById("email_manquant");
     let adresseError = document.getElementById("adresse_manquante");
     let cityError = document.getElementById("ville_manquante");
     let inputs = this.document.getElementsByTagName("input")
-    let erreur = document.getElementById("error")
-    
-    let caraPrenom = /^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?/
+
 
     document.forms["inscription"]["Nom"].addEventListener("input", (e) => {
 
-        if (!inputs["Nom"].value) {
-
-            e.preventDefault();
-            nom.textContent = "Nom manquant";
-            nom.style.color = "red"
-
-        } else if (caraPrenom.test(inputs["Nom"].value) == false) {
-
+        if (
+            autreVerifchara.test(inputs["Nom"].value) == false ||
+            verifNombre.test(inputs["Nom"].value) == true ||
+            verifCharacter.test(inputs["Nom"].value) == true ||
+            inputs["Nom"].value == ""
+        ) {
             e.preventDefault();
             nom.textContent = "Format incorect";
             nom.style.color = "orange"
-
-        }else{
+            return false
+        } else {
+            console.log("Nom accepté");
             nom.textContent = ""
         }
     })
     document.forms["inscription"]["Prenom"].addEventListener("input", (e) => {
-        
 
-        if (!inputs["Prenom"].value) {
-
-            e.preventDefault();
-            prenom.textContent = "Prénom manquant";
-            prenom.style.color = "red"
-
-        } else if (caraPrenom.test(inputs["Prenom"].value) == false) {
-
+        if (
+            autreVerifchara.test(inputs["Prenom"].value) == false ||
+            verifNombre.test(inputs["Prenom"].value) == true ||
+            verifCharacter.test(inputs["Prenom"].value) == true ||
+            inputs["Prenom"].value == ""
+        ) {
             e.preventDefault();
             prenom.textContent = "Format incorect";
             prenom.style.color = "orange"
-
-        }else{
+            return false
+        } else {
+            console.log("Prenom accepté");
             prenom.textContent = ""
         }
-
     })
 
-    
     document.forms["inscription"]["email"].addEventListener("input", (e) => {
 
-        if (!inputs["email"].value) {
+        if (autreVerifchara.test(inputs["email"].value) == false ||
+            verifMail.test(inputs["email"].value) == false) {
 
-            e.preventDefault();
-            emailError.textContent = "Email manquant";
-            emailError.style.color = "red"
-
-        }else{
+            emailError.textContent = "Format incorect";
+            emailError.style.color = "orange"
+            return false
+        } else {
+            console.log("Adresse mail acceptée");
             emailError.textContent = ""
         }
     })
+
     document.forms["inscription"]["adresse"].addEventListener("input", (e) => {
 
-        if (!inputs["adresse"].value) {
+        if (autreVerifchara.test(inputs["adresse"].value) == false ||
+            verifCharacter.test(inputs["adresse"].value) == true || inputs["adresse"].value == "") {
 
-            e.preventDefault();
-            adresseError.textContent = "adresse manquante";
-            adresseError.style.color = "red"
-
-        } else{
+            adresseError.textContent = "Format incorect";
+            adresseError.style.color = "orange"
+            return false
+        } else {
+            console.log("Adresse acceptée");
             adresseError.textContent = ""
         }
     })
+
     document.forms["inscription"]["ville"].addEventListener("input", (e) => {
 
-        if (!inputs["ville"].value) {
+        if (autreVerifchara.test(inputs["ville"].value) == false ||
+            verifNombre.test(inputs["ville"].value) == true ||
+            verifCharacter.test(inputs["ville"].value) == true ||
+            inputs["ville"].value == "") {
 
-            cityError.textContent = "ville manquante";
-            cityError.style.color = "red"
-
-        } else{
+            cityError.textContent = "Format incorect";
+            cityError.style.color = "orange"
+            return false
+        } else {
+            console.log("Ville acceptée");
             cityError.textContent = ""
         }
     })
@@ -459,98 +469,32 @@ const formmulaire = () => {
         let inputs = this.document.getElementsByTagName("input")
 
         for (let i = 0; i < inputs.length; i++) {
-            console.log('------------------------------------');
-            console.log(inputs[i]);
-            console.log('------------------------------------');
+
             if (!inputs[i].value) {
                 erreur = "Veulliez renseigner tous les champs !!!"
+            } else if (inputs[i].value === false) {
+                erreur = "Veulliez renseigner tous les champs !!!"
             }
-    }
-    if (erreur) {
-        e.preventDefault()
-        document.getElementById('error').innerHTML = erreur
-        document.getElementById('error').style.color = "red"
-        return false
-    } else {
-        alert("Votre formulair a bien été envoyer")
-    }
-})
-}
-/*document.getElementById("email").addEventListener("input", () => {
-               let parragrapheErreur = document.getElementById('error');
-               if (document.getElementById("email").value != document.getElementById("email2").value) {
-                   parragrapheErreur.innerHTML = "Les deux adresses emails ne corespondent pas";
-               } else {
-                   parragrapheErreur.innerHTML = "";
-               }
-           })
-       
-           document.getElementById("mdp2").addEventListener("input", (e) => {
-               let parragrapheErreur = document.getElementById('error')
-               if (this.value != document.getElementById("mdp").value) {
-                   parragrapheErreur.innerHTML = "Les deux mots de passe ne corespondent pas"
-               } else {
-                   parragrapheErreur.innerHTML = ""
-               }
-           })*/
-
-
-        /*if (erreure) {
-            //e.preventDefault()
-            document.getElementById('error').innerHTML = erreure
+        }
+        if (erreur) {
+            e.preventDefault()
+            document.getElementById('error').innerHTML = erreur
+            document.getElementById('error').style.color = "red"
             return false
         } else {
             alert("Votre formulair a bien été envoyer")
-        }*/
 
-        /*
-        for (let i = 0; i < inputs.length; i++) {
-            console.log('------------------------------------');
-            console.log(inputs[i]);
-            console.log('------------------------------------');
-            if (!inputs[i].value) {
-                erreure = "Veulliez renseigner tous les champs !!!"
-            }
+            contact = {
+                Nom: inputs["Nom"].value,
+                Prenom: inputs["Prenom"].value,
+                Adresse: inputs["adresse"].value,
+                ville: inputs["ville"].value,
+                Email: inputs["email"].value,
+            };
+            return contact;
 
         }
-        
-        let nom = document.getElementById("nom")
-         let prenom = document.getElementById("prenom")
-         let email = document.getElementById("email")
-         let emailConf = document.getElementById("email2")
-         let mdp = document.getElementById("mdp")
-         let mdpConf = document.getElementById("mdp2")
-     
-         if (!mdpConf.value) {
-             erreure = " votre mdp conf "
-         }
-         if (!mdp.value) {
-             erreure = " votre mdp "
-         }
-     
-         if (!emailConf.value) {
-             erreure = " votre email conf "
-         }
-         if (!email.value) {
-             erreure = " votre email "
-         }
-         if (!prenom.value) {
-             erreure = " votre prenom "
-         }
-         if (!nom.value) {
-             erreure = " votre nom "
-         }*/
+    })
 
-        /*for (let i = 0; i < inputs.length; i++) {
-            if (!inputs[i].value) {
-                erreure = "Veulliez renseigner tous les éléments"
-            }
-            else if (error) {
-                e.preventDefault()
-                document.getElementById('error').innerHTML = erreure
-                return false
-            } else {
-                alert("Votre formulair a bien été envoyer")
-            }
-     
-        }*/
+}
+

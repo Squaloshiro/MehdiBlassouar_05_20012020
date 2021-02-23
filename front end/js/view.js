@@ -72,7 +72,7 @@ const afficheProduit = (camera) => {
     informationProduit.textContent = "Fiche produit";
     priceProduit.textContent = camera.price;
 
-    let local = JSON.parse(localStorage.getItem("user"))
+    // let local = JSON.parse(localStorage.getItem("user"))
 
 }
 
@@ -181,10 +181,12 @@ const detailProduit = (myCamera) => {
 
     ajoutPanier.addEventListener('click', (e) => {
         let local = JSON.parse(localStorage.getItem("panier"))
+
         let newajoutPanier = {
             ref: myCamera,
             objectif: choixObjectif.value,
             quantiter: selectQuantite.value,
+
 
         }
         appelLocal(newajoutPanier, local)
@@ -289,7 +291,7 @@ const affichePanier = (panier, index) => {
     let elementSupUnitaire = document.createElement("td")
     let bouttonSupPanierUnitaire = document.createElement("input")
     bouttonSupPanierUnitaire.setAttribute("type", "button")
-    bouttonSupPanierUnitaire.setAttribute("id", "button_sup_elmt")
+    // bouttonSupPanierUnitaire.setAttribute("id", index)
     bouttonSupPanierUnitaire.setAttribute("value", "Supprimer ce produit")
 
 
@@ -320,7 +322,7 @@ const affichePanier = (panier, index) => {
     bouttonSupPanierUnitaire.addEventListener('click', (e) => {
 
         supprimerUnArticle(index)
-        ligneProduit = document.getElementById(index)
+
         ligneProduit.parentNode.removeChild(ligneProduit)
         affichePanierNombre()
         sommeTotaleFonction()
@@ -331,14 +333,10 @@ const affichePanier = (panier, index) => {
 }
 
 
-const supprimerUnArticle = (i) => {
-    console.log('------------testttttttttt------------------------');
-    console.log(i);
-    console.log('------------------------------------');
+const supprimerUnArticle = () => {
 
     let local = JSON.parse(localStorage.getItem("panier"));
-    local.splice(i, 1);
-    localStorage.clear();
+    local.splice(0, 1);
     localStorage.setItem("panier", JSON.stringify(local));
 
 };
@@ -351,9 +349,7 @@ const affichePanierVide = () => {
 
     let pan = document.getElementById("nombre_element_panier")
     let blockPage = document.getElementById("bloc_page")
-    console.log('------------------------------------');
-    console.log(pan.textContent);
-    console.log('------------------------------------');
+
     if (pan.textContent == 0) {
 
         let main = document.getElementById("element_principal_Panier")

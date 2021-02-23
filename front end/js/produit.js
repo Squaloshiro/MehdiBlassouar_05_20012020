@@ -6,7 +6,7 @@ const getCamera = () => {
 
     const theCamera = request(`http://localhost:3000/api/cameras/${id}`);
 
-    theCamera.then((myCamera) => {
+    theCamera.then((myCamera, index) => {
         if (myCamera === "Probleme server") {
             load()
         } /*else if (load() === myCamera) {
@@ -14,7 +14,7 @@ const getCamera = () => {
         }*/ else if (!myCamera._id) {
             produitIndispo()
         } else {
-            detailProduit(myCamera);
+            detailProduit(myCamera, index);
 
 
         }

@@ -134,7 +134,7 @@ border: 1px solid white;
 
 
 .text_produits{ /* div pour le text de produit*/
-position: relative;
+position: relative;*/
 
 }
 
@@ -339,4 +339,10 @@ padding-top:3em ;
         opacity: 1;
         z-index: 999;
     }
+}
+
+
+.image_confirmation{
+    width: 8em;
+    height: 8em;
 }

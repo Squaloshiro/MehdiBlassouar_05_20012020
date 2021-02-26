@@ -7,6 +7,7 @@
 <script src="js/helper.js" defer></script>
 
 <script src="js/view.js" defer></script>
+
 <script src="js/panier.js" defer></script>
 
 
@@ -39,16 +40,21 @@
             <div id="formulaire">
                 <h2>Valider votre formulaire</h2>
                 <form id="inscription" name="inscription" method="POST">
-                    <input type="text" name="Nom" placeholder="Votre nom" id="nom_input"><span class="verification"
-                        id="nom"></span><br>
-                    <input type="text" name="Prenom" placeholder="Votre prénom" id="prenom_input"><span
+                    <label for="Nom">Votre nom : </label>
+                    <input type="text" name="Nom" placeholder="Entrer votre nom" id="nom_input"><span
+                        class="verification" id="nom"></span><br>
+                    <label for="Prenom">Votre prénom : </label>
+                    <input type="text" name="Prenom" placeholder="Entrer votre prénom" id="prenom_input"><span
                         class="verification" id="prenom"></span><br>
-                    <input type="email" name="email" placeholder="Votre email" id="email"><span class="verification"
-                        id="email_manquant"></span><br>
-                    <input type="text" name="adresse" placeholder="Adresse" id="adresse"><span class="verification"
-                        id="adresse_manquante"></span><br>
-                    <input type="text" name="ville" placeholder="ville" id="ville"><span class="verification"
-                        id="ville_manquante"></span><br>
+                    <label for="email">Votre email : </label>
+                    <input type="email" name="email" placeholder="Entrer votre email" id="email"><span
+                        class="verification" id="email_manquant"></span><br>
+                    <label for="adresse">Votre adresse : </label>
+                    <input type="text" name="adresse" placeholder="Entrer votre Adresse" id="adresse"><span
+                        class="verification" id="adresse_manquante"></span><br>
+                    <label for="ville">Votre ville : </label>
+                    <input type="text" name="ville" placeholder="Entrer votre ville" id="ville"><span
+                        class="verification" id="ville_manquante"></span><br>
 
                     <input type="submit" value="Validation">
                 </form>

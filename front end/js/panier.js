@@ -3,8 +3,8 @@ const lePanier = () => {
 
     let local = JSON.parse(localStorage.getItem("panier"));
 
-    local?.length && local.forEach((panier, index) => {
-        affichePanier(panier, index);
+    local?.length && local.forEach((panier) => {
+        affichePanier(panier);
 
     })
 
@@ -14,6 +14,8 @@ const lePanier = () => {
     formmulaire()
     affichePanierVide()
     sommeTotaleFonction()
+
+
 }
 
 

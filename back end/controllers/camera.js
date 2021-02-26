@@ -28,7 +28,7 @@ exports.getOneCamera = (req, res, next) => {
     }
   ).catch(
     () => {
-      res.status(500).send(new Error('Database error!'));
+      res.status(500).send(new Error('Database error!'))
     }
   )
 };
@@ -47,13 +47,17 @@ exports.getOneCamera = (req, res, next) => {
  *
  */
 exports.orderCameras = (req, res, next) => {
+console.log('------------------------------------');
+console.log(req.body);
+console.log('------------------------------------');
   if (!req.body.contact ||
-      !req.body.contact.firstName ||
-      !req.body.contact.lastName ||
-      !req.body.contact.address ||
-      !req.body.contact.city ||
-      !req.body.contact.email ||
-      !req.body.products) {
+    !req.body.contact.firstName ||
+    !req.body.contact.lastName ||
+    !req.body.contact.address ||
+    !req.body.contact.city ||
+    !req.body.contact.email ||
+    !req.body.products) {
+
     return res.status(400).send(new Error('Bad request!'));
   }
   let queries = [];
@@ -87,6 +91,7 @@ exports.orderCameras = (req, res, next) => {
   ).catch(
     (error) => {
       return res.status(500).json(new Error(error));
+
     }
   );
 };

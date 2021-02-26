@@ -177,21 +177,36 @@ const detailProduit = (myCamera) => {
 
     });
 
+
+
+
+
     let choixObjectif = document.getElementById("select")
 
     ajoutPanier.addEventListener('click', (e) => {
         let local = JSON.parse(localStorage.getItem("panier"))
 
+        let id =
+            Math.floor((1 + Math.random()) * 0x10000)
+                .toString(16)
+                .substring(1);
+
         let newajoutPanier = {
             ref: myCamera,
             objectif: choixObjectif.value,
             quantiter: selectQuantite.value,
-
+            unikid: id
 
         }
+
+
+
         appelLocal(newajoutPanier, local)
         affichePanierNombre()
     })
+
+
+
 
 }
 
@@ -229,10 +244,6 @@ const affichePanierTableau = () => {
     bouttonSupPanier.addEventListener('click', () => {
 
         localStorage.removeItem("panier")
-
-        let tousSup = document.querySelector("#tableau_panier")
-
-        tousSup.parentNode.removeChild(tousSup)
         affichePanierNombre()
         affichePanierVide()
 
@@ -252,7 +263,8 @@ const sommeTotaleFonction = () => {
 
 }
 
-const affichePanier = (panier, index) => {
+const affichePanier = (panier) => {
+    const unikid = panier.unikid
 
 
 
@@ -274,7 +286,8 @@ const affichePanier = (panier, index) => {
     let elementTitre = document.createElement("td")
     let titrePanier = document.createElement("h2")
     ligneTitre.setAttribute("class", "change_place_titre")
-    ligneProduit.setAttribute("id", index)
+    ligneProduit.setAttribute("id", unikid)
+    //ligneProduit.setAttribute("unikid", unikid)
 
     let elementObjectif = document.createElement("td")
     let objectifPanier = document.createElement("p")
@@ -291,7 +304,7 @@ const affichePanier = (panier, index) => {
     let elementSupUnitaire = document.createElement("td")
     let bouttonSupPanierUnitaire = document.createElement("input")
     bouttonSupPanierUnitaire.setAttribute("type", "button")
-    // bouttonSupPanierUnitaire.setAttribute("id", index)
+    //bouttonSupPanierUnitaire.setAttribute("id", index)
     bouttonSupPanierUnitaire.setAttribute("value", "Supprimer ce produit")
 
 
@@ -321,8 +334,9 @@ const affichePanier = (panier, index) => {
 
     bouttonSupPanierUnitaire.addEventListener('click', (e) => {
 
-        supprimerUnArticle(index)
 
+
+        supprimerUnArticle(panier.unikid)
         ligneProduit.parentNode.removeChild(ligneProduit)
         affichePanierNombre()
         sommeTotaleFonction()
@@ -333,11 +347,15 @@ const affichePanier = (panier, index) => {
 }
 
 
-const supprimerUnArticle = () => {
+const supprimerUnArticle = (unikid) => {
 
-    let local = JSON.parse(localStorage.getItem("panier"));
-    local.splice(0, 1);
-    localStorage.setItem("panier", JSON.stringify(local));
+
+
+    const local = JSON.parse(localStorage.getItem("panier"));
+    const newlocal = local.filter(produit => produit.unikid !== unikid)
+
+
+    localStorage.setItem("panier", JSON.stringify(newlocal));
 
 };
 
@@ -370,7 +388,7 @@ const formmulaire = () => {
     let verifNombre = /[0-9]/;
     let verifMail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     let verifCharacter = /[§!@#$%^&*().?":{}|<>]/;
-    let autreVerifchara = /^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?/
+    let autreVerifchara = /[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?/
 
 
     let nom = document.getElementById("nom");
@@ -418,7 +436,7 @@ const formmulaire = () => {
 
     document.forms["inscription"]["email"].addEventListener("input", (e) => {
 
-        if (autreVerifchara.test(inputs["email"].value) == false ||
+        if (
             verifMail.test(inputs["email"].value) == false) {
 
             emailError.textContent = "Format incorect";
@@ -432,8 +450,9 @@ const formmulaire = () => {
 
     document.forms["inscription"]["adresse"].addEventListener("input", (e) => {
 
-        if (autreVerifchara.test(inputs["adresse"].value) == false ||
-            verifCharacter.test(inputs["adresse"].value) == true || inputs["adresse"].value == "") {
+        if (verifNombre.test(inputs["adresse"].value) == false || autreVerifchara.test(inputs["adresse"].value) == false ||
+            verifCharacter.test(inputs["adresse"].value) == true || inputs["adresse"].value == ""
+        ) {
 
             adresseError.textContent = "Format incorect";
             adresseError.style.color = "orange"
@@ -441,6 +460,7 @@ const formmulaire = () => {
         } else {
             console.log("Adresse acceptée");
             adresseError.textContent = ""
+
         }
     })
 
@@ -461,17 +481,26 @@ const formmulaire = () => {
     })
 
     document.forms["inscription"].addEventListener("submit", (e) => {
+        e.preventDefault()
         let erreur
         let inputs = this.document.getElementsByTagName("input")
+        let verif = document.getElementsByClassName("verification")
+
 
         for (let i = 0; i < inputs.length; i++) {
-
             if (!inputs[i].value) {
-                erreur = "Veulliez renseigner tous les champs !!!"
-            } else if (inputs[i].value === false) {
                 erreur = "Veulliez renseigner tous les champs !!!"
             }
         }
+
+
+
+        for (let i = 0; i < verif.length; i++) {
+            if (verif[i].innerHTML == "Format incorect") {
+                erreur = "Veulliez renseigner corectement les champs !!!"
+            }
+        }
+
         if (erreur) {
             e.preventDefault()
             document.getElementById('error').innerHTML = erreur
@@ -479,18 +508,118 @@ const formmulaire = () => {
             return false
         } else {
             alert("Votre formulair a bien été envoyer")
+            erreur = ""
+            let local = JSON.parse(localStorage.getItem("panier"))
 
-            contact = {
-                Nom: inputs["Nom"].value,
-                Prenom: inputs["Prenom"].value,
-                Adresse: inputs["adresse"].value,
-                ville: inputs["ville"].value,
-                Email: inputs["email"].value,
-            };
-            return contact;
+            let contact = {
+                firstName: inputs["Nom"].value,
+                lastName: inputs["Prenom"].value,
+                address: inputs["adresse"].value,
+                city: inputs["ville"].value,
+                email: inputs["email"].value,
+            }
 
+            envoieDonne(contact)
         }
+
     })
 
+
 }
+
+const envoieDonne = (contact) => {
+
+    let local = JSON.parse(localStorage.getItem("panier"))
+
+
+
+    let products = []
+    local.forEach((product) => {
+        products.push(product.ref._id);
+    })
+    let data = {
+        contact,
+        products,
+    }
+
+    test(data)
+
+}
+
+
+const creatConfirmation = (local) => {
+
+    document.getElementById("firstName").innerHTML = local.contact.lastName;
+    document.getElementById("orderId").innerHTML = local.orderId;
+
+}
+
+const recupPanier = (commande) => {
+    let afficheCommande = document.getElementById("recup_commande")
+
+    let ligneConf = document.createElement("tr")
+    let confImg = document.createElement("td")
+    let imgConf = document.createElement("img")
+    imgConf.setAttribute("src", commande.imageUrl);
+    imgConf.setAttribute("class", "image_confirmation");
+
+
+    let confTitre = document.createElement("td")
+    let titreConf = document.createElement("h2")
+
+
+    let prixConf = document.createElement("td")
+    let prixFinal = document.createElement("span")
+
+    afficheCommande.appendChild(ligneConf)
+    ligneConf.appendChild(confImg)
+    ligneConf.appendChild(confTitre)
+    ligneConf.appendChild(prixConf)
+    confImg.appendChild(imgConf)
+    confTitre.appendChild(titreConf)
+    prixConf.appendChild(prixFinal)
+
+
+    titreConf.textContent = commande.name
+    prixFinal.textContent = priceFormat(commande.price)
+}
+
+
+const prixTotalconf = () => {
+
+    let divPrix = document.getElementById("prix_conf_total")
+
+    let totalConfirmation = document.createElement("span")
+
+
+    totalConfirmation.setAttribute("class", "Somme_Totale_confirmation")
+
+    divPrix.appendChild(totalConfirmation)
+
+}
+
+
+const sommeTotaleConfirmation = (local) => {
+
+    let sommeTotale = 0
+
+    let totalConfirmation = document.querySelector(".Somme_Totale_confirmation")
+    local.products.forEach((commande) => {
+        sommeTotale += commande.price
+
+
+    })
+
+
+
+
+    totalConfirmation.textContent = "Somme totale : " + priceFormat(sommeTotale)
+
+}
+
+
+
+
+
+
 

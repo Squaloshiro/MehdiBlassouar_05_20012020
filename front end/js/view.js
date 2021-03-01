@@ -112,8 +112,8 @@ const detailProduit = (myCamera) => {
     photoSoloProduit.setAttribute("alt", "photo_produit");
     photoSoloProduit.setAttribute("class", "image_produit");
     renseignementProduit.setAttribute("class", "fiche_descriptif");
-    descriptionPrincipal.setAttribute("class", "");
-    selecteurOption.setAttribute("class", "")
+    descriptionPrincipal.setAttribute("class", "description_fiche");
+    selecteurOption.setAttribute("class", "element_selection")
     selectObjectif.setAttribute("class", "")
     selectQuantite.setAttribute("class", "")
     affichePrix.setAttribute("class", "");
@@ -278,6 +278,7 @@ const affichePanier = (panier) => {
 
     let ligneProduit = document.createElement("tr")
     let elementImg = document.createElement("td")
+    elementImg.setAttribute('class', 'element_image')
     let imgPanier = document.createElement("img")
     imgPanier.setAttribute("src", panier.ref.imageUrl);
     imgPanier.setAttribute("class", "image_Panier");
@@ -558,6 +559,7 @@ const recupPanier = (commande) => {
     let afficheCommande = document.getElementById("recup_commande")
 
     let ligneConf = document.createElement("tr")
+    ligneConf.setAttribute("class", "ligne_panier_conf")
     let confImg = document.createElement("td")
     let imgConf = document.createElement("img")
     imgConf.setAttribute("src", commande.imageUrl);

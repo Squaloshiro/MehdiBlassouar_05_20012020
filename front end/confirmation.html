@@ -25,24 +25,18 @@
     </div>
     <div id="bloc_page">
         <header>
-            <nav class="navbar">
-                <a class="logolink" href="index.html">
+            <nav class="navbar_conf">
+                <a class="logolink_conf" href="index.html">
                     <img class="logo" src="img/logorinoco.png" alt="">
                 </a>
-                <div class="eltnav">
-                    <a class="index" href="index.html">Accueil</a>
-                    <a class="panier" href="panier.html?id=">
-                        <i class="fas fa-shopping-cart"></i>
-                        Panier (<span id="nombre_element_panier"></span>)
-                    </a>
-                </div>
             </nav>
         </header>
         <main id="element_confirmation">
-            <h1>Confirmation de votre commande</h1>
-            <section>
+            <h1 class="titre_conf">Confirmation de votre commande</h1>
+            <section class="
+            element_text_conf">
                 <p>Bonjour <span id="firstName"></span>,</p>
-                <p>
+                <p class="text_mercie">
                     Nous vous remercions pour votre achat. Nous vous tiendrons informés
                     par e-mail lorsque les articles de votre commande auront été
                     expédiés.
@@ -51,17 +45,12 @@
                     Votre N° de commande est :
                 </p>
                 <p id="orderId"></p>
-                <p>
-                    Merci de noter ce numéro et d'en faire référence pour toute
-                    communication avec nos services concernant cette commande.
-                </p>
-                <p>Nous espérons vous revoir très bientôt.</p>
 
 
                 <p>Ci-dessous le détail de votre commande :</p>
             </section>
-            <section>
-                <h2>Récapitulatif</h2>
+            <section class="element_panier_conf">
+                <h2 class="second_titre_conf">Récapitulatif de votre commande</h2>
 
                 <table id="recup_commande"></table>
                 <div id="prix_conf_total"></div>

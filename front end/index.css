@@ -4,6 +4,10 @@
     box-sizing: inherit;
 }
 
+
+
+
+
 #bloc_page{
     display: flex;
     flex-direction: column;
@@ -134,7 +138,10 @@ border: 1px solid white;
 
 
 .text_produits{ /* div pour le text de produit*/
-position: relative;*/
+position: relative;
+height: 28%;
+border-bottom-left-radius: 2em;
+border-bottom-right-radius: 2em;
 
 }
 
@@ -197,7 +204,7 @@ footer{
 
 #element_principal_Panier{
     width: 99%;
-    border: 1px solid black;
+    
     margin-bottom: 1em;
     display: flex;
     flex-direction: column;
@@ -346,3 +353,206 @@ padding-top:3em ;
     width: 8em;
     height: 8em;
 }
+#formulaire{
+    border-top: 2px solid black;
+   
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 30em;
+
+}
+
+#inscription{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 15em;
+    width: 50%;
+   
+}
+
+.navbar_conf{
+    display: flex;
+    justify-content: center;
+}
+
+.titre_conf{
+    text-align: center;
+    margin: 1em;
+}
+
+.element_text_conf{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 10em;
+    margin-bottom: 2em;
+}
+.element_text_conf p {
+    text-align: center;
+}
+
+#orderId{
+    margin-bottom: 1.5em;
+}
+
+.text_mercie{
+    margin-bottom: 2em;
+}
+
+.second_titre_conf, #recup_commande{
+    margin-bottom: 2em;
+}
+
+.element_panier_conf{
+    padding: 1em;
+    border: rgb(177, 174, 174) 1px solid;
+    border-radius: 1em;
+    margin-bottom: 1em;
+   
+}
+
+.ligne_panier_conf{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1em;
+    
+}
+
+#recup_commande{
+    display: flex;
+    flex-direction: column;
+}
+
+.image_confirmation{
+    border-radius: 1em;
+}
+
+.Somme_Totale_confirmation{
+    text-align: end;
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+#prix_conf_total{
+    display: flex;
+}
+
+
+
+
+@media screen and (max-width:700px){
+    .navbar{
+        display: flex;
+        flex-direction: column;
+        
+    }
+    .eltnav{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 5em;
+    }
+    .eltnav a{
+        font-size: 1.3em;
+    }
+
+    
+    .logolink{
+        height: 5em;
+    }
+    .logolink{
+        display: flex;
+        justify-content: center;
+    }
+    .logo{
+        height: 6em;
+        object-fit: cover;
+    }
+    .agencement_structure{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        width: 100%;
+    }
+    .image_produit{
+        width: 100%;
+    }
+    .div_photo{
+        width: 90%;
+    }
+    .fiche_descriptif{
+        display: flex;
+       
+        justify-content: space-evenly;
+       
+        height: 10em;
+
+    }
+    .description_fiche{
+        margin-left: 0.5em;
+        margin-right: 0.5em;
+    }
+    .element_selection{
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+    }
+    .change_place_produit{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+     
+        height: 20em;
+    }
+    .image_Panier{
+        width: 90%;
+        object-fit: cover;
+        border-radius: 1em;
+        
+    }
+    .element_image{
+        display: flex;
+        justify-content: center;
+    }
+    .button_sup_pan{
+      
+    }
+    .Somme_Totale{
+   
+    }
+    #element_a_sup{
+        display: flex;
+        flex-direction: column;
+        justify-content:space-evenly;
+        height: 5em;
+    }
+    #formulaire{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        height: 30em;
+
+    }
+    #inscription{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        height: 15em;
+       
+    }
+    #titre_panier{
+        text-align: center;
+        font-size: 1.5em;
+    }
+
+} 

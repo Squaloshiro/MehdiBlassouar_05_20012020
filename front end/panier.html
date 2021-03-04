@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="fr">
-<link rel="stylesheet" href="index.css">
-<link rel="shortcut icon" type="image/ico" href="img/logorinoco.ico">
-<script src="https://kit.fontawesome.com/c38b3b03f9.js" crossorigin="anonymous"></script>
-<script src="js/request.js" defer></script>
-<script src="js/helper.js" defer></script>
 
-<script src="js/view.js" defer></script>
-
-<script src="js/panier.js" defer></script>
 
 
 <head>
+    <link rel="stylesheet" href="index.css">
+    <link rel="shortcut icon" type="image/ico" href="img/logorinoco.ico">
+    <script src="https://kit.fontawesome.com/c38b3b03f9.js" crossorigin="anonymous"></script>
+    <script src="js/request.js" defer></script>
+    <script src="js/helper.js" defer></script>
+
+    <script src="js/view.js" defer></script>
+
+    <script src="js/panier.js" defer></script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orinoco, récapitulatif de votre commande</title>
@@ -40,17 +42,17 @@
             <div id="formulaire">
                 <h2>Valider votre formulaire</h2>
                 <form id="inscription" name="inscription" method="POST">
-                    <label for="Nom">Votre nom : </label>
-                    <input type="text" name="Nom" placeholder="Entrer votre nom" id="nom_input"><span
+                    <label for="nom_input">Votre nom : </label>
+                    <input type="text" name="Nom" placeholder="Entrer votre nom" id="nom_input" required><span
                         class="verification" id="nom"></span><br>
-                    <label for="Prenom">Votre prénom : </label>
-                    <input type="text" name="Prenom" placeholder="Entrer votre prénom" id="prenom_input"><span
+                    <label for="prenom_input">Votre prénom : </label>
+                    <input type="text" name="Prenom" placeholder="Entrer votre prénom" id="prenom_input" required><span
                         class="verification" id="prenom"></span><br>
                     <label for="email">Votre email : </label>
-                    <input type="email" name="email" placeholder="Entrer votre email" id="email"><span
+                    <input type="email" name="email" placeholder="Entrer votre email" id="email" required><span
                         class="verification" id="email_manquant"></span><br>
                     <label for="adresse">Votre adresse : </label>
-                    <input type="text" name="adresse" placeholder="Entrer votre Adresse" id="adresse"><span
+                    <input type="text" name="adresse" placeholder="Entrer votre Adresse" id="adresse" required><span
                         class="verification" id="adresse_manquante"></span><br>
                     <label for="ville">Votre ville : </label>
                     <input type="text" name="ville" placeholder="Entrer votre ville" id="ville"><span

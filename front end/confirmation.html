@@ -25,17 +25,23 @@
     </div>
     <div id="bloc_page">
         <header>
-            <nav class="navbar_conf">
-                <a class="logolink_conf" href="index.html">
+            <nav class="navbar">
+                <a class="logolink" href="index.html">
                     <img class="logo" src="img/logorinoco.png" alt="">
                 </a>
+                <div class="eltnav">
+                    <a class="index" href="index.html">Accueil</a>
+                    <a class="panier" href="panier.html?id=">
+                        <i class="fas fa-shopping-cart"></i>
+                        Panier (<span id="nombre_element_panier"></span>)
+                    </a>
+                </div>
             </nav>
         </header>
         <main id="element_confirmation">
             <h1 class="titre_conf">Confirmation de votre commande</h1>
-            <section class="
-            element_text_conf">
-                <p>Bonjour <span id="firstName"></span>,</p>
+            <section class="element_text_conf">
+                <h2>Bonjour <span id="firstName"></span>,</h2>
                 <p class="text_mercie">
                     Nous vous remercions pour votre achat. Nous vous tiendrons informés
                     par e-mail lorsque les articles de votre commande auront été

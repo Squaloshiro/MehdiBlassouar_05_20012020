@@ -185,7 +185,7 @@ const detailProduit = (myCamera) => {
 
     ajoutPanier.addEventListener('click', (e) => {
         let local = JSON.parse(localStorage.getItem("panier"))
-
+        let newLocal = JSON.parse(localStorage.getItem("newPanier"))
         let id =
             Math.floor((1 + Math.random()) * 0x10000)
                 .toString(16)
@@ -200,15 +200,14 @@ const detailProduit = (myCamera) => {
         }
 
 
-
+        newAppelLocal(newajoutPanier, newLocal)
         appelLocal(newajoutPanier, local)
         affichePanierNombre()
     })
 
-
-
-
 }
+
+
 
 const appelLocal = (newajoutPanier, local) => {
     if (local?.length) {
@@ -217,8 +216,19 @@ const appelLocal = (newajoutPanier, local) => {
     } else {
         localStorage.setItem("panier", JSON.stringify([newajoutPanier]))
     }
+}
+
+const newAppelLocal = (newajoutPanier, newLocal) => {
+    if (newLocal?.length) {
+        newLocal = [...newLocal, newajoutPanier]
+        localStorage.setItem("newPanier", JSON.stringify(newLocal))
+    } else {
+        localStorage.setItem("newPanier", JSON.stringify([newajoutPanier]))
+    }
 
 }
+
+
 const affichePanierNombre = () => {
     let local = JSON.parse(localStorage.getItem("panier"))
     let indexPanier = document.querySelector('#nombre_element_panier')
@@ -244,6 +254,7 @@ const affichePanierTableau = () => {
     bouttonSupPanier.addEventListener('click', () => {
 
         localStorage.removeItem("panier")
+        localStorage.removeItem("newPanier")
         affichePanierNombre()
         affichePanierVide()
 
@@ -349,7 +360,9 @@ const affichePanier = (panier) => {
 
 
 const supprimerUnArticle = (unikid) => {
-
+    const newLocal = JSON.parse(localStorage.getItem("newPanier"))
+    const newNewlocal = newLocal.filter(produit => produit.unikid !== unikid)
+    localStorage.setItem("newPanier", JSON.stringify(newNewlocal));
 
 
     const local = JSON.parse(localStorage.getItem("panier"));
@@ -403,34 +416,34 @@ const formmulaire = () => {
     document.forms["inscription"]["Nom"].addEventListener("input", (e) => {
 
         if (
-            autreVerifchara.test(inputs["Nom"].value) == false ||
-            verifNombre.test(inputs["Nom"].value) == true ||
-            verifCharacter.test(inputs["Nom"].value) == true ||
-            inputs["Nom"].value == ""
+            autreVerifchara.test(inputs["Nom"].value) === false ||
+            verifNombre.test(inputs["Nom"].value) === true ||
+            verifCharacter.test(inputs["Nom"].value) === true ||
+            inputs["Nom"].value === ""
         ) {
             e.preventDefault();
             nom.textContent = "Format incorect";
             nom.style.color = "orange"
             return false
         } else {
-            console.log("Nom accepté");
+
             nom.textContent = ""
         }
     })
     document.forms["inscription"]["Prenom"].addEventListener("input", (e) => {
 
         if (
-            autreVerifchara.test(inputs["Prenom"].value) == false ||
-            verifNombre.test(inputs["Prenom"].value) == true ||
-            verifCharacter.test(inputs["Prenom"].value) == true ||
-            inputs["Prenom"].value == ""
+            autreVerifchara.test(inputs["Prenom"].value) === false ||
+            verifNombre.test(inputs["Prenom"].value) === true ||
+            verifCharacter.test(inputs["Prenom"].value) === true ||
+            inputs["Prenom"].value === ""
         ) {
             e.preventDefault();
             prenom.textContent = "Format incorect";
             prenom.style.color = "orange"
             return false
         } else {
-            console.log("Prenom accepté");
+
             prenom.textContent = ""
         }
     })
@@ -438,28 +451,28 @@ const formmulaire = () => {
     document.forms["inscription"]["email"].addEventListener("input", (e) => {
 
         if (
-            verifMail.test(inputs["email"].value) == false) {
+            verifMail.test(inputs["email"].value) === false) {
 
             emailError.textContent = "Format incorect";
             emailError.style.color = "orange"
             return false
         } else {
-            console.log("Adresse mail acceptée");
+
             emailError.textContent = ""
         }
     })
 
     document.forms["inscription"]["adresse"].addEventListener("input", (e) => {
 
-        if (verifNombre.test(inputs["adresse"].value) == false || autreVerifchara.test(inputs["adresse"].value) == false ||
-            verifCharacter.test(inputs["adresse"].value) == true || inputs["adresse"].value == ""
+        if (verifNombre.test(inputs["adresse"].value) === false || autreVerifchara.test(inputs["adresse"].value) === false ||
+            verifCharacter.test(inputs["adresse"].value) === true || inputs["adresse"].value === ""
         ) {
 
             adresseError.textContent = "Format incorect";
             adresseError.style.color = "orange"
             return false
         } else {
-            console.log("Adresse acceptée");
+
             adresseError.textContent = ""
 
         }
@@ -467,16 +480,16 @@ const formmulaire = () => {
 
     document.forms["inscription"]["ville"].addEventListener("input", (e) => {
 
-        if (autreVerifchara.test(inputs["ville"].value) == false ||
-            verifNombre.test(inputs["ville"].value) == true ||
-            verifCharacter.test(inputs["ville"].value) == true ||
-            inputs["ville"].value == "") {
+        if (autreVerifchara.test(inputs["ville"].value) === false ||
+            verifNombre.test(inputs["ville"].value) === true ||
+            verifCharacter.test(inputs["ville"].value) === true ||
+            inputs["ville"].value === "") {
 
             cityError.textContent = "Format incorect";
             cityError.style.color = "orange"
             return false
         } else {
-            console.log("Ville acceptée");
+
             cityError.textContent = ""
         }
     })
@@ -497,7 +510,7 @@ const formmulaire = () => {
 
 
         for (let i = 0; i < verif.length; i++) {
-            if (verif[i].innerHTML == "Format incorect") {
+            if (verif[i].innerHTML === "Format incorect") {
                 erreur = "Veulliez renseigner corectement les champs !!!"
             }
         }
@@ -541,6 +554,7 @@ const envoieDonne = (contact) => {
     let data = {
         contact,
         products,
+
     }
 
     test(data)
@@ -555,19 +569,25 @@ const creatConfirmation = (local) => {
 
 }
 
-const recupPanier = (commande) => {
+const recupPanier = (panierRecup) => {
+
+
     let afficheCommande = document.getElementById("recup_commande")
 
     let ligneConf = document.createElement("tr")
     ligneConf.setAttribute("class", "ligne_panier_conf")
     let confImg = document.createElement("td")
     let imgConf = document.createElement("img")
-    imgConf.setAttribute("src", commande.imageUrl);
+    imgConf.setAttribute("src", panierRecup.ref.imageUrl);
     imgConf.setAttribute("class", "image_confirmation");
 
 
     let confTitre = document.createElement("td")
     let titreConf = document.createElement("h2")
+
+    let eltQuantiterConf = document.createElement("td")
+    let quantiterConf = document.createElement("span")
+
 
 
     let prixConf = document.createElement("td")
@@ -576,14 +596,17 @@ const recupPanier = (commande) => {
     afficheCommande.appendChild(ligneConf)
     ligneConf.appendChild(confImg)
     ligneConf.appendChild(confTitre)
+    ligneConf.appendChild(eltQuantiterConf)
     ligneConf.appendChild(prixConf)
     confImg.appendChild(imgConf)
     confTitre.appendChild(titreConf)
+    eltQuantiterConf.appendChild(quantiterConf)
     prixConf.appendChild(prixFinal)
 
 
-    titreConf.textContent = commande.name
-    prixFinal.textContent = priceFormat(commande.price)
+    quantiterConf.textContent = panierRecup.quantiter
+    titreConf.textContent = panierRecup.ref.name
+    prixFinal.textContent = priceFormat(panierRecup.ref.price * panierRecup.quantiter)
 }
 
 
@@ -601,13 +624,13 @@ const prixTotalconf = () => {
 }
 
 
-const sommeTotaleConfirmation = (local) => {
+const sommeTotaleConfirmation = (newLocal) => {
 
     let sommeTotale = 0
 
     let totalConfirmation = document.querySelector(".Somme_Totale_confirmation")
-    local.products.forEach((commande) => {
-        sommeTotale += commande.price
+    newLocal.forEach((commande) => {
+        sommeTotale += commande.ref.price * commande.quantiter
 
 
     })

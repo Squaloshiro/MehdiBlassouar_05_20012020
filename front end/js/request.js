@@ -14,7 +14,7 @@ const request = async (url) => {
 
 
 
-const test = (data) => {
+const post = (data) => {
 
 
     const promise = fetch("http://localhost:3000/api/cameras/order", {

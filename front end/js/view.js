@@ -203,7 +203,41 @@ const detailProduit = (myCamera) => {
         newAppelLocal(newajoutPanier, newLocal)
         appelLocal(newajoutPanier, local)
         affichePanierNombre()
+
+        ajoutQuantiterAnimation()
     })
+    animationBoutonAjoutPanier(renseignementProduit)
+    ajoutQuantiterAnimation()
+}
+const animationBoutonAjoutPanier = (renseignementProduit) => {
+
+    let animation = document.createElement("p")
+    animation.setAttribute("class", "animation_Ajout")
+    renseignementProduit.appendChild(animation)
+
+
+
+
+}
+
+const ajoutQuantiterAnimation = () => {
+    let local = JSON.parse(localStorage.getItem("panier"))
+    let animation = document.querySelector(".animation_Ajout")
+    let localQuantiterAnimation = local?.length ? local.length : 0
+    if (localQuantiterAnimation === 1) {
+        animation.style.display = "block"
+        animation.textContent = " Vous avez " + localQuantiterAnimation + " produit dans votre panier "
+
+    } else if (localQuantiterAnimation >= 2) {
+
+        animation.textContent = " Vous avez " + localQuantiterAnimation + " produits dans votre panier "
+
+    }
+    else if (localQuantiterAnimation === 0) {
+
+        animation.style.display = "none"
+    }
+
 
 }
 
@@ -557,7 +591,7 @@ const envoieDonne = (contact) => {
 
     }
 
-    test(data)
+    post(data)
 
 }
 

@@ -4,18 +4,13 @@
     box-sizing: inherit;
 }
 
-
-
-
-
 #bloc_page{
     display: flex;
     flex-direction: column;
     align-items: center;
-    /*background-color: #f6e1ff;*/
     padding: 1em;
-
 }
+
 header {
     border: 1px solid rgb(177, 174, 174);
     width: 99%;
@@ -43,13 +38,14 @@ header {
     padding: 0.5em;
     text-decoration: none;
     font-size: 2em;
-    
 }
+
 .index:hover{
     background-color:  #a467be;
     border-radius: 1em;
     color: rgb(255, 255, 255);
 }
+
 .panier:hover{
     background-color:  #a467be;
     border-radius: 1em;
@@ -70,8 +66,6 @@ header {
     justify-content: center;
     background-color: #f3ebf3;
 }
-
-
 
 #fiche_princhipal{
     width: 99%;
@@ -98,7 +92,6 @@ header {
 .agencement_structure{
 display: flex;
 flex-direction: row;
-
 }
 
 .fiche_produit{ /*toute les section dans la div*/
@@ -110,12 +103,12 @@ flex-direction: row;
     overflow: hidden;
 }
 
-
 .elements_produits{ /*div pour l'img dans la section*/
 width: 100%;
 height: 70%;
 border: 1px solid white;
 }
+
 .div_photo{
     border: 1px solid rgb(209, 209, 209);;
     width: 30em;
@@ -130,19 +123,18 @@ border: 1px solid white;
     height: 100%;
     object-fit: cover;
 }
+
 .photo_produit{
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-
 .text_produits{ /* div pour le text de produit*/
 position: relative;
 height: 28%;
 border-bottom-left-radius: 2em;
 border-bottom-right-radius: 2em;
-
 }
 
 .fiche_descriptif{
@@ -165,7 +157,6 @@ left: 24px;
     position: absolute;
     top: 41px;
     left: 25px;
-    
 }
 
 .prix_produit{
@@ -173,6 +164,7 @@ left: 24px;
     right: 25px;
     top: 41px;
 }
+
 /*fin de la main*/
 
 footer{
@@ -183,12 +175,11 @@ footer{
     display: flex;
     justify-content: center;
     align-items: center;
-    /*background-color: #f3ebf3;*/
 }
 
 /*Tabeleau Panier*/
+
 #element_a_sup{
-    
     width:90% ;
     margin-bottom: 1em;
     margin-top: 1em;
@@ -204,13 +195,12 @@ footer{
 
 #element_principal_Panier{
     width: 99%;
-    
     margin-bottom: 1em;
     display: flex;
     flex-direction: column;
     align-items: center;
-    
 }
+
 #tableau_panier{
     width: 90%;
 }
@@ -229,7 +219,6 @@ footer{
     height: 1.5em;
 }
 
-
 .image_Panier{
     width: 8em;
     height: 8em;
@@ -242,12 +231,12 @@ footer{
     width: 100%;
     border: 1px solid black;
 }
+
 html {
     --primary: #9356DC;
     --secondary: #FF79DA;
     --tertiary: #99E2D0;
 }
-
 
 .loadcontent {
     position: fixed;
@@ -262,16 +251,15 @@ html {
     animation: loader1 1s linear;
     animation-fill-mode: none;
 }
+
 .load_server{
     position: fixed;
     top: 0;
     left: 0;
-    
     width: 100%;
     height: 100%;
     background-color: rgb(235, 235, 235);
     animation-name: loader1;
-   
     animation: loader1 3s linear;
     animation-fill-mode: none;
     opacity: 1;
@@ -328,12 +316,10 @@ padding-top:3em ;
 }
 
 
-
 @keyframes loader {
     100% {
         transform: translate(-50%, -50%) rotate(360deg);
     }
-
 }
 
 @keyframes loader1 {
@@ -341,29 +327,25 @@ padding-top:3em ;
         opacity: 1;
         z-index: 999;
     }
-
     99% {
         opacity: 1;
         z-index: 999;
     }
 }
 
-
 .image_confirmation{
     width: 8em;
     height: 8em;
 }
+
 #formulaire{
     border-top: 2px solid black;
-   
     width: 100%;
-
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     height: 30em;
-
 }
 
 #inscription{
@@ -372,7 +354,6 @@ padding-top:3em ;
     justify-content: space-evenly;
     height: 15em;
     width: 50%;
-   
 }
 
 .navbar_conf{
@@ -392,6 +373,7 @@ padding-top:3em ;
     height: 10em;
     margin-bottom: 2em;
 }
+
 .element_text_conf p {
     text-align: center;
 }
@@ -413,7 +395,6 @@ padding-top:3em ;
     border: rgb(177, 174, 174) 1px solid;
     border-radius: 1em;
     margin-bottom: 1em;
-   
 }
 
 .ligne_panier_conf{
@@ -422,7 +403,6 @@ padding-top:3em ;
     align-items: center;
     width: 100%;
     margin-bottom: 1em;
-    
 }
 
 #recup_commande{
@@ -444,15 +424,13 @@ padding-top:3em ;
     display: flex;
 }
 
-
-
-
 @media screen and (max-width:700px){
+
     .navbar{
         display: flex;
         flex-direction: column;
-        
     }
+
     .eltnav{
         display: flex;
         flex-direction: column;
@@ -460,99 +438,107 @@ padding-top:3em ;
         align-items: center;
         height: 5em;
     }
+
     .eltnav a{
         font-size: 1.3em;
     }
 
-    
     .logolink{
         height: 5em;
     }
+
     .logolink{
         display: flex;
         justify-content: center;
     }
+
     .logo{
         height: 6em;
         object-fit: cover;
     }
+
     .agencement_structure{
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-
         width: 100%;
     }
+
     .image_produit{
         width: 100%;
     }
+
     .div_photo{
         width: 90%;
     }
+
     .fiche_descriptif{
         display: flex;
-       
         justify-content: space-evenly;
-       
         height: 10em;
-
     }
+
     .description_fiche{
         margin-left: 0.5em;
         margin-right: 0.5em;
     }
+
     .element_selection{
         display: flex;
         justify-content: space-evenly;
         width: 100%;
     }
+
     .change_place_produit{
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
-     
         height: 20em;
     }
+
     .image_Panier{
         width: 90%;
         object-fit: cover;
         border-radius: 1em;
-        
     }
+
     .element_image{
         display: flex;
         justify-content: center;
     }
-    .button_sup_pan{
-      
-    }
-    .Somme_Totale{
-   
-    }
+
     #element_a_sup{
         display: flex;
         flex-direction: column;
         justify-content:space-evenly;
         height: 5em;
     }
+
     #formulaire{
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
         height: 30em;
-
     }
+
     #inscription{
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
         height: 15em;
-       
     }
+
     #titre_panier{
         text-align: center;
         font-size: 1.5em;
     }
 
+    .ligne_panier_conf{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 1em;
+    }
 } 
